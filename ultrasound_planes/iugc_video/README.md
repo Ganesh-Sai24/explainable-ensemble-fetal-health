@@ -66,6 +66,8 @@ Video
   v
 Processed Frames
 ```
+<img width="572" height="342" alt="image" src="https://github.com/user-attachments/assets/05498f7b-5539-40d0-9970-bb7f76b84f86" />
+
 Frame extraction allows image-based models to analyze information contained in ultrasound videos.
 
 ## Use in This Project
