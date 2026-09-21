@@ -1,0 +1,1043 @@
+# Supporting Paper 2 Analysis
+
+## AI-Driven Advances in Women’s Health Diagnostics: Current Applications and Future Directions
+
+**Author:** Christian Macedonia  
+**Journal:** Diagnostics  
+**Year:** 2025  
+**Volume:** 15  
+**Article:** 3076  
+**DOI:** 10.3390/diagnostics15233076  
+**Article Type:** Narrative Review  
+**Published:** 3 December 2025  
+
+---
+
+## 1. Paper Overview
+
+This paper is a narrative review of the current and emerging applications of Artificial Intelligence (AI) and Machine Learning (ML) in women's health diagnostics.
+
+The review covers applications across obstetrics and gynecology, including:
+
+- AI-assisted fetal ultrasound
+- Fetal anomaly detection
+- Fetal monitoring
+- Preeclampsia prediction
+- Cervical screening
+- Endometriosis diagnosis
+- Ovarian cancer detection
+- Digital biomarkers
+- Remote maternal-fetal monitoring
+- Clinical decision support
+
+The review considers literature and clinical examples from January 2018 to August 2025.
+
+Rather than developing one new machine learning model, the paper provides a broader view of how AI is being used in women's healthcare and what is required for these systems to become clinically useful.
+
+The paper also emphasizes that healthcare AI must be considered beyond model accuracy. Issues such as bias, privacy, regulation, workflow integration, equity, transparency, and clinical responsibility are also important.
+
+---
+
+## 2. Type of Research
+
+This paper is a **narrative review**.
+
+It is not an experimental study that develops and tests one new prediction model.
+
+The author searched:
+
+- PubMed/MEDLINE
+- Google Scholar
+- IEEE Xplore
+- Relevant specialty conference proceedings
+
+The search covered literature from January 2018 through August 2025.
+
+The paper explicitly states that it is not a PRISMA-based systematic review or an exhaustive list of every AI model.
+
+Instead, it provides a curated overview of important AI applications in women's health.
+
+---
+
+## 3. Main Objective of the Paper
+
+The main objective is to provide a practical overview of evidence-backed AI and ML applications in women's health and identify ten promising projects across different clinical domains.
+
+The selection was based on four main criteria:
+
+1. OB/GYN relevance
+2. Clinical validation or scale
+3. Near-term impact
+4. Diversity across healthcare domains
+
+The review therefore looks not only at whether an AI system exists, but also at whether there is evidence that it can be relevant to real clinical workflows.
+
+---
+
+## 4. AI and Machine Learning in the Paper
+
+The paper distinguishes between Artificial Intelligence and Machine Learning.
+
+### Artificial Intelligence
+
+AI is treated as the broader field of computational methods that perform tasks associated with human cognition, including:
+
+- perception
+- pattern recognition
+- decision-making
+
+### Machine Learning
+
+ML is described as a subset of AI that learns patterns from data and improves performance on a task without relying entirely on explicitly programmed rules.
+
+Therefore, the relationship can be represented as:
+
+AI
+↓
+Machine Learning
+↓
+Data-driven models
+↓
+Prediction / Classification / Decision Support
+
+This distinction is useful for understanding our own project because our system uses machine learning as part of a broader AI-assisted healthcare framework.
+
+---
+
+## 5. Why This Paper Is Relevant to Our Project
+
+Our project is:
+
+**An Optimized Explainable Ensemble Learning Framework for AI-Assisted Early Fetal Health Risk Assessment Using Cardiotocography Data**
+
+This supporting paper is relevant because it establishes the broader role of AI in women's healthcare and fetal assessment.
+
+The paper shows that AI is being used for:
+
+- fetal imaging
+- fetal monitoring
+- risk prediction
+- automated pattern recognition
+- clinical decision support
+- personalized healthcare
+
+These ideas support the broader motivation behind our project.
+
+However, this paper does not provide the CTG-specific modelling methodology used in our project.
+
+The relationship is:
+
+Supporting Paper 2
+→ Broad AI and women's-health context
+
+Base Paper
+→ CTG-specific machine-learning foundation
+
+Our Project
+→ Optimized, explainable ensemble framework for CTG-based fetal health risk assessment
+
+---
+
+## 6. Major AI Applications Discussed
+
+The paper highlights ten promising AI applications in women's health.
+
+| No. | Application | Domain | Main Task |
+|---|---|---|---|
+| 1 | GE Voluson SWIFT | Imaging | Fetal anomaly detection |
+| 2 | Samsung iNSIGHT | Imaging | Real-time fetal image segmentation |
+| 3 | Google/Mayo colposcopy model | Imaging | Cervical lesion detection |
+| 4 | Mobile ODT EVA | Imaging | Point-of-care cervical screening |
+| 5 | Mirvie cfRNA platform | Laboratory | Preeclampsia prediction |
+| 6 | ASPRE algorithm | Laboratory | Early-onset preeclampsia prediction |
+| 7 | DotLab DotEndo | Laboratory | Noninvasive endometriosis diagnosis |
+| 8 | Orion/Columbia multi-omics | Laboratory | Endometriosis subtype prediction |
+| 9 | Nuvo INVU | Monitoring | Remote maternal-fetal monitoring |
+| 10 | Heller Lab/MSKCC | Laboratory | Ovarian cancer detection |
+
+These examples demonstrate that AI is being applied across different types of medical data and clinical tasks.
+
+---
+
+## 7. AI in Fetal Imaging
+
+One of the important areas discussed in the paper is AI-assisted fetal ultrasound.
+
+The review highlights AI systems that can assist with:
+
+- fetal anomaly detection
+- image analysis
+- anatomical segmentation
+- screening
+
+For example, the paper discusses GE Voluson SWIFT as an AI-enhanced 3D ultrasound application for fetal anomaly detection.
+
+The validation evidence summarized in the paper includes approximately 5,000 scans and reports 94% sensitivity for the cited example.
+
+Samsung iNSIGHT is another example discussed for real-time segmentation and analysis of obstetric images.
+
+The paper reports approximately 2,000 images and a Dice coefficient of 0.89 for the cited technical validation.
+
+These examples demonstrate how AI can automate or assist with complex fetal imaging tasks.
+
+---
+
+## 8. AI in Fetal Monitoring
+
+Another important area for our project is fetal monitoring.
+
+The paper discusses remote maternal-fetal monitoring, particularly the Nuvo INVU platform.
+
+The system provides remote nonstress testing with AI-assisted analytics.
+
+The review reports more than 50,000 monitoring sessions for the cited real-world deployment and describes a reported 30% reduction in hospitalizations.
+
+This demonstrates the broader movement toward:
+
+Continuous monitoring
+↓
+Automated analysis
+↓
+Early detection
+↓
+Clinical decision support
+
+Our project does not develop a remote monitoring device, but the concept of AI-assisted fetal monitoring is directly relevant to CTG-based fetal health assessment.
+
+---
+
+## 9. Relationship to Cardiotocography
+
+This paper is not specifically a CTG modelling paper.
+
+It does not provide:
+
+- the UCI CTG dataset
+- CTG feature definitions
+- SMOTE
+- balanced accuracy methodology
+- the specific ML comparison used in our base paper
+
+However, its discussion of fetal monitoring provides the broader clinical context for our work.
+
+CTG is one form of fetal monitoring, and our project applies machine learning to CTG-derived information.
+
+The broader relationship can be represented as:
+
+Fetal Monitoring
+↓
+Physiological Data
+↓
+AI-Based Pattern Recognition
+↓
+Risk Assessment
+↓
+Clinical Decision Support
+
+Our project applies this idea specifically to cardiotocography data.
+
+---
+
+## 10. AI for Early Risk Prediction
+
+The paper gives several examples of AI and computational models being used to predict health risks before serious complications occur.
+
+Preeclampsia prediction is one of the major examples.
+
+The paper discusses approaches involving:
+
+- maternal characteristics
+- biophysical measurements
+- biomarkers
+- cell-free RNA
+- machine learning
+
+The Mirvie cfRNA platform is discussed as an example of using cfRNA signatures for pregnancy complication prediction.
+
+The ASPRE algorithm is another example combining maternal factors, biophysical measurements, and biomarkers for early preeclampsia prediction.
+
+The review reports an 82% detection rate for the cited ASPRE implementation study.
+
+---
+
+## 11. Connection to Early Fetal Health Risk Assessment
+
+Early risk assessment is an important concept shared with our project.
+
+The general idea is:
+
+Patient Data
+↓
+AI Analysis
+↓
+Risk Prediction
+↓
+Early Identification
+↓
+Clinical Decision Support
+
+Our project follows a similar high-level approach:
+
+CTG Data
+↓
+Feature Processing
+↓
+Machine Learning
+↓
+Fetal Health Classification
+↓
+Risk Assessment
+↓
+Clinical Decision Support
+
+Therefore, this paper supports the broader motivation for developing AI systems that can assist with earlier identification of potential fetal health problems.
+
+---
+
+## 12. Clinical Decision Support
+
+A major theme of the paper is that AI should support clinical decision-making rather than completely replace clinicians.
+
+The author follows an:
+
+**"augment, not replace"**
+
+approach.
+
+AI can assist by providing:
+
+- pattern recognition
+- risk estimates
+- predictions
+- summaries
+- additional information
+
+The final clinical interpretation and responsibility should remain with the healthcare professional.
+
+This principle is directly relevant to our project.
+
+Our proposed system should therefore be described as:
+
+**AI-assisted fetal health risk assessment**
+
+rather than:
+
+**An autonomous fetal diagnosis system**
+
+---
+
+## 13. Explainability and Transparency
+
+The paper gives significant importance to transparency and auditability.
+
+The author states that clinicians should be able to understand important aspects of an AI system, including:
+
+- input sources
+- model version
+- known limitations
+- how an output was generated
+
+This is directly relevant to the **Explainable** component of our project.
+
+A healthcare AI system should ideally provide more than a final prediction.
+
+It should also help answer:
+
+- Which features influenced the prediction?
+- What information contributed to the risk assessment?
+- Why did the model produce this output?
+- What are the limitations of the model?
+
+This supports our decision to include explainability in the proposed framework.
+
+---
+
+## 14. Bias and Fairness
+
+The paper strongly emphasizes the problem of bias in healthcare AI.
+
+If a model is trained using a skewed or unrepresentative dataset, its performance may not be equally reliable across different populations.
+
+The paper therefore recommends:
+
+- measuring demographic performance differences
+- reporting subgroup performance
+- mitigating performance gaps
+- evaluating models before deployment
+- continuing evaluation after deployment
+
+This is important for our project because strong performance on a particular dataset does not automatically guarantee the same performance in every clinical population.
+
+---
+
+## 15. Privacy and Security
+
+The paper highlights the sensitive nature of women's health data.
+
+Important considerations include:
+
+- patient confidentiality
+- secure data flows
+- encryption
+- access controls
+- appropriate use of clinical information
+
+Our project uses a publicly available research dataset, but any future clinical implementation would require much stronger privacy and security mechanisms.
+
+Therefore, privacy is an important consideration when moving from an academic machine-learning prototype to a real healthcare system.
+
+---
+
+## 16. Regulatory Considerations
+
+The paper discusses the evolving regulatory environment for AI-based medical software.
+
+It specifically discusses:
+
+**Software as a Medical Device (SaMD)**
+
+and the FDA's:
+
+**Predetermined Change Control Plan (PCCP)**
+
+for AI-enabled device software.
+
+The important concept is that healthcare AI systems require ongoing monitoring and controlled updates.
+
+A model should not simply be developed once and assumed to remain valid forever.
+
+Changes in:
+
+- data
+- population
+- clinical environment
+- model version
+
+can affect performance.
+
+---
+
+## 17. Model Lifecycle and Monitoring
+
+The paper recommends a lifecycle-oriented approach to AI.
+
+Important concepts include:
+
+- clinical ownership
+- versioned documentation
+- performance monitoring
+- update conditions
+- rollback conditions
+- suspension criteria
+
+This introduces the idea that healthcare AI involves more than training a model.
+
+The complete lifecycle is:
+
+Data
+↓
+Model Development
+↓
+Validation
+↓
+Deployment
+↓
+Monitoring
+↓
+Update
+↓
+Re-validation
+
+This is an important future consideration for our project.
+
+---
+
+## 18. Workflow Integration
+
+The paper emphasizes that AI should fit naturally into clinical workflows.
+
+A model can have good predictive performance but still be difficult to use if:
+
+- the output is difficult to understand
+- it requires unnecessary manual steps
+- it does not integrate with existing systems
+- it increases workload
+
+Therefore:
+
+**Good model performance is not the same as complete clinical usefulness.**
+
+A practical healthcare AI system should also be:
+
+- understandable
+- usable
+- accessible
+- workflow-compatible
+
+This supports our plan to provide a user-facing system rather than only a machine-learning model.
+
+---
+
+## 19. Equity and Accessibility
+
+The paper discusses the possibility that AI could increase healthcare disparities if systems are developed or deployed without considering accessibility.
+
+Important considerations include:
+
+- representative datasets
+- diverse populations
+- accessible technologies
+- affordability
+- language and usability
+- healthcare resource differences
+
+This is especially important when AI systems are eventually used across different hospitals, regions, and patient populations.
+
+---
+
+## 20. Future Direction: Continuous Monitoring
+
+The paper identifies continuous monitoring as an important future direction.
+
+It discusses the increasing use of:
+
+- wearable sensors
+- heart-rate information
+- sleep data
+- blood pressure
+- temperature
+- contraction activity
+- portable diagnostic devices
+
+The paper also discusses the potential role of edge AI, where some analysis can occur close to the device before information is transferred to larger systems.
+
+The general direction is:
+
+Continuous Data
+↓
+Real-Time / Edge Analysis
+↓
+AI Pattern Recognition
+↓
+Risk Detection
+↓
+Clinical System
+
+Our current project is dataset-based and does not implement real-time wearable monitoring, but this provides a possible future direction.
+
+---
+
+## 21. Future Direction: Personalized Healthcare
+
+The paper also discusses AI-enabled personalized medicine.
+
+The goal is to move away from one-size-fits-all approaches toward recommendations based on individual characteristics and context.
+
+The paper mentions factors such as:
+
+- phenotype
+- genotype
+- clinical information
+- individual context
+- patient values
+
+For our project, the corresponding concept is individual CTG-based assessment.
+
+Instead of applying only a fixed rule to every patient, the machine-learning model analyzes the features of each individual CTG record to estimate the corresponding fetal health class.
+
+---
+
+## 22. Human-AI Collaboration
+
+The paper emphasizes that AI should be treated as part of a human-AI system.
+
+AI is useful for:
+
+- pattern recognition
+- identifying subtle trends
+- processing large amounts of data
+- generating predictions
+- assisting decision-making
+
+However, clinical decision-making involves additional factors that may not be present in the dataset.
+
+Therefore:
+
+AI Output
++
+Clinical Context
++
+Clinician Judgment
+=
+Clinical Decision
+
+This principle is important for our project because our system is intended as a decision-support framework rather than a replacement for medical professionals.
+
+---
+
+## 23. Five Practical Lessons from the Paper
+
+The paper provides five important practical lessons about AI.
+
+### 1. AI works best when the problem is specific
+
+A clear and well-defined problem makes it easier to develop useful AI systems.
+
+### 2. AI can reduce documentation burden
+
+AI can help structure and summarize clinical information.
+
+### 3. AI is strong at pattern recognition but does not replace clinical intuition
+
+AI can identify patterns in data, but clinicians remain responsible for interpreting the broader clinical situation.
+
+### 4. AI can help explain complex information
+
+AI can assist with communicating complex medical information when the content is reviewed by clinicians.
+
+### 5. AI can improve through structured feedback
+
+The paper discusses feedback from clinicians as a way of improving AI systems over time.
+
+These lessons reinforce the idea that healthcare AI should be developed as a human-AI collaboration.
+
+---
+
+## 24. Major Challenges Identified
+
+The paper identifies several challenges that must be considered when developing healthcare AI.
+
+### Bias
+
+A model trained on unrepresentative data may produce unequal performance.
+
+### Privacy
+
+Women's health data is sensitive and requires appropriate security.
+
+### Regulation
+
+Medical AI systems may fall under healthcare software and medical-device regulations.
+
+### Workflow Integration
+
+AI must fit into the existing clinical workflow.
+
+### Equity
+
+AI should not increase healthcare disparities.
+
+### Transparency
+
+Users should have meaningful information about how an AI system generates its outputs.
+
+### Accountability
+
+There should be clear responsibility for decisions involving AI systems.
+
+### Model Drift
+
+Performance can change when the system is deployed in new populations or environments.
+
+---
+
+## 25. What We Learned From This Paper
+
+The major concepts we take from this paper are:
+
+1. AI is becoming increasingly important in women's healthcare.
+2. AI can assist with fetal imaging and fetal monitoring.
+3. AI can support early risk prediction.
+4. AI can act as a clinical decision-support tool.
+5. Explainability and transparency are important in healthcare AI.
+6. Bias and population representation must be considered.
+7. Healthcare data requires strong privacy protection.
+8. AI systems require validation and monitoring.
+9. AI should fit into clinical workflows.
+10. AI should augment clinical judgment rather than replace it.
+11. Continuous monitoring is an important future direction.
+12. Personalized risk assessment is an important future direction.
+13. Predictive performance alone is not sufficient to establish clinical usefulness.
+
+---
+
+## 26. What We Do NOT Take Directly From This Paper
+
+This distinction is important in our project documentation.
+
+This paper does **not** provide the following technical components of our base methodology:
+
+- UCI CTG dataset
+- 21 CTG features
+- Normal/Suspect/Pathological CTG classification methodology
+- SMOTE implementation
+- 5-fold cross-validation procedure used in the base paper
+- Balanced Accuracy as the main evaluation metric
+- LightGBM as the selected CTG model
+- The specific eight-model ML comparison from the base paper
+- The DNN architecture from the base paper
+
+These components come from the **base paper**.
+
+Supporting Paper 2 instead contributes the broader concepts of:
+
+- AI in women's health
+- fetal monitoring
+- early risk prediction
+- clinical decision support
+- explainability
+- transparency
+- bias
+- privacy
+- regulation
+- workflow integration
+- equity
+- continuous monitoring
+- personalized healthcare
+
+---
+
+## 27. How This Paper Supports Our Project
+
+The paper supports several parts of our project concept.
+
+### AI-Assisted
+
+The paper demonstrates the growing role of AI as a support technology in women's healthcare.
+
+### Early
+
+The paper discusses predictive applications designed to identify potential health risks before complications become severe.
+
+### Fetal Health
+
+The paper includes fetal imaging and maternal-fetal monitoring applications.
+
+### Risk Assessment
+
+The review includes AI-based risk prediction applications such as preeclampsia prediction and fetal monitoring.
+
+### Explainable
+
+The paper emphasizes transparency and auditability of AI systems.
+
+### Clinical Decision Support
+
+The paper supports the use of AI as an assistant to clinicians rather than an autonomous replacement.
+
+### Framework
+
+The paper shows that a healthcare AI solution involves more than a model. It also requires validation, transparency, workflow integration, monitoring, privacy, and responsible deployment.
+
+---
+
+## 28. Relationship With Our Base Paper
+
+The two papers play different roles.
+
+### Supporting Paper 2
+
+Provides the broader AI and clinical context:
+
+- AI in women's healthcare
+- fetal imaging
+- fetal monitoring
+- early risk prediction
+- clinical decision support
+- explainability
+- bias
+- privacy
+- regulation
+- future AI directions
+
+### Base Paper
+
+Provides the CTG-specific technical foundation:
+
+- UCI CTG dataset
+- fetal health classification
+- class imbalance
+- SMOTE
+- 5-fold cross-validation
+- balanced accuracy
+- multiple ML models
+- DNN comparison
+- LightGBM-based decision support
+
+### Our Project
+
+Builds on the CTG foundation and focuses on:
+
+- optimization
+- ensemble learning
+- explainable AI
+- fetal health risk assessment
+
+---
+
+## 29. Literature Progression Toward Our Project
+
+The literature can be understood as a progression:
+
+Supporting Paper 2
+↓
+Broad AI applications in women's healthcare
+↓
+Fetal imaging + fetal monitoring + risk prediction
+↓
+Clinical decision support + explainability
+
+Supporting Paper 1
+↓
+AI applications specifically related to fetal growth disorders
+↓
+Fetal risk assessment + clinical AI
+
+Base Paper
+↓
+CTG-based fetal health classification
+↓
+Machine learning + SMOTE + cross-validation + balanced accuracy
+
+Our Project
+↓
+CTG-based fetal health risk assessment
+↓
+Optimization + Ensemble Learning + Explainable AI
+
+This gives our project a clear progression from broad clinical AI research to a specific CTG-based technical problem.
+
+---
+
+## 30. Supporting Paper 2 vs Base Paper
+
+| Aspect | Supporting Paper 2 | Base Paper |
+|---|---|---|
+| Research type | Narrative review | Experimental research |
+| Main focus | AI in women's health | CTG-based fetal health classification |
+| Scope | Broad OB/GYN | Specific fetal-health problem |
+| Fetal imaging | Yes | Not central |
+| Fetal monitoring | Yes | CTG-focused |
+| CTG methodology | Not provided | Central |
+| SMOTE | Not central | Important |
+| Balanced Accuracy | Not central | Important |
+| ML comparison | Review of many applications | Specific experimental comparison |
+| Explainability | Transparency and auditability | Feature importance / model interpretation |
+| Clinical decision support | Major theme | Proposed application |
+| Bias | Major theme | Important future consideration |
+| Privacy | Major theme | Future deployment consideration |
+| Regulation | Major theme | Future deployment consideration |
+
+---
+
+## 31. Supporting Paper 2 vs Supporting Paper 1
+
+The two supporting papers provide different perspectives.
+
+| Aspect | Supporting Paper 1 | Supporting Paper 2 |
+|---|---|---|
+| Main focus | AI in fetal growth disorders | AI across women's health |
+| Scope | Fetal growth-related conditions | Broad OB/GYN |
+| Fetal assessment | Strong | Strong |
+| Fetal monitoring | Relevant | Relevant |
+| AI/ML | Yes | Yes |
+| Explainability | Relevant | Strong emphasis on transparency |
+| Bias | Discussed | Strong emphasis |
+| Privacy | Discussed | Strong emphasis |
+| Regulation | Discussed | Strong emphasis |
+| Future technologies | Yes | Yes |
+| Relation to project | Fetal-health context | Broader clinical AI context |
+
+Together, these supporting papers strengthen the literature foundation around the CTG-based base paper.
+
+---
+
+## 32. Research Gap Relevant to Our Project
+
+This paper shows that AI is being applied across many areas of women's healthcare, including fetal monitoring and risk prediction.
+
+However, the review is broad and does not develop a specific optimized, explainable ensemble framework for CTG-based fetal health classification.
+
+The base paper provides a strong CTG machine-learning foundation, but our project focuses on extending that direction through:
+
+- model optimization
+- ensemble learning
+- explainable AI
+- and fetal health risk assessment
+
+Therefore, Supporting Paper 2 helps establish the broader clinical need and technological direction, while the base paper provides the specific technical starting point.
+
+---
+
+## 33. Important Limitations of This Paper
+
+The paper should be interpreted according to its research design.
+
+### Narrative Review
+
+It is a narrative review rather than a systematic meta-analysis.
+
+### Broad Scope
+
+The review covers many different healthcare domains, so CTG is not its central technical focus.
+
+### Different Technologies
+
+The ten highlighted applications use different:
+
+- datasets
+- sensors
+- imaging modalities
+- biomarkers
+- algorithms
+- validation methods
+
+Therefore, their reported performance values should not be directly compared as if they were results from the same task.
+
+### Clinical Deployment Differences
+
+Some examples are research studies, while others involve technical validation or real-world deployment.
+
+Therefore, the evidence level and context differ between examples.
+
+---
+
+## 34. Key Numbers to Remember
+
+The most useful numbers from this paper for viva preparation are:
+
+- **2025** — publication year
+- **January 2018–August 2025** — literature search period
+- **10** — highlighted AI projects
+- **4** — selection criteria
+- **~5,000 scans** — GE fetal-imaging example
+- **94% sensitivity** — reported for that example
+- **~2,000 images** — Samsung iNSIGHT example
+- **0.89 Dice coefficient** — reported for Samsung iNSIGHT
+- **~10,000 images** — Google/Mayo colposcopy example
+- **0.91 AUC** — reported for that example
+- **~15,000 screenings** — Mobile ODT EVA example
+- **92% sensitivity** — reported for that example
+- **1,840 pregnancies** — Mirvie prospective cohort
+- **75% detection** — reported for early preeclampsia in the cited example
+- **26,941 pregnancies** — ASPRE implementation study
+- **82% detection rate** — reported for the cited ASPRE example
+- **1,000+ patients** — DotLab DotEndo example
+- **94% sensitivity / 91% specificity** — reported for the cited endometriosis study
+- **>50,000 sessions** — INVU real-world deployment
+- **30% reduction in hospitalizations** — reported outcome in the review
+- **400 serum samples** — Heller Lab/MSKCC proof-of-concept
+- **0.95 AUC** — reported for ovarian cancer detection in the cited example
+
+These values belong to the individual studies or deployments summarized by the review. They are not results produced by one common model or experiment.
+
+---
+
+## 35. Viva Questions and Answers
+
+### Q1. What is Supporting Paper 2?
+
+Supporting Paper 2 is a 2025 narrative review published in Diagnostics that examines current and future applications of AI and machine learning in women's health diagnostics.
+
+### Q2. What areas does the paper cover?
+
+It covers fetal imaging, fetal monitoring, preeclampsia prediction, cervical screening, endometriosis, ovarian cancer, digital biomarkers, remote monitoring, and clinical decision support.
+
+### Q3. Why did we select this paper?
+
+We selected it because it provides broader clinical and technological context for using AI in women's healthcare and fetal assessment.
+
+### Q4. Is this a CTG-specific paper?
+
+No. It is a broad women's-health AI review. CTG is not its central technical methodology.
+
+### Q5. What is the main contribution of this paper?
+
+It provides a curated overview of ten promising AI applications in women's health and discusses the technical, clinical, ethical, regulatory, and implementation considerations surrounding them.
+
+### Q6. What are the four selection criteria?
+
+The four criteria are:
+
+1. OB/GYN relevance
+2. Clinical validation or scale
+3. Near-term impact
+4. Diversity across domains
+
+### Q7. How is the paper related to fetal health?
+
+It discusses AI-enhanced fetal ultrasound, fetal anomaly detection, and remote maternal-fetal monitoring.
+
+### Q8. How is it related to our CTG project?
+
+It provides the broader context for AI-assisted fetal monitoring and early risk assessment, while our base paper provides the specific CTG machine-learning methodology.
+
+### Q9. Why is explainability important?
+
+Because healthcare professionals need transparency about AI outputs, including the inputs used, model version, and known limitations.
+
+### Q10. What does the paper say about clinicians?
+
+It supports the principle that AI should augment clinical judgment rather than replace the clinician.
+
+### Q11. What are the major challenges of healthcare AI?
+
+The paper discusses bias, privacy, security, regulation, workflow integration, equity, accountability, and monitoring.
+
+### Q12. What future technologies does the paper discuss?
+
+It discusses wearable devices, continuous monitoring, edge AI, longitudinal data, personalized medicine, and EHR-integrated clinical decision support.
+
+### Q13. Does this paper provide our project methodology?
+
+No. It provides the broader AI and clinical context. The CTG-specific methodology comes from the base paper.
+
+### Q14. What is the most important lesson we take from this paper?
+
+A healthcare AI system should not be evaluated only by predictive performance. Transparency, fairness, privacy, validation, workflow integration, and clinical oversight are also important.
+
+---
+
+## 36. Short Explanation for Project Review
+
+If the panel asks:
+
+**"What did you learn from Supporting Paper 2?"**
+
+We can answer:
+
+> Supporting Paper 2 is a 2025 narrative review on AI-driven applications in women's health. It shows how AI is being used in fetal imaging, fetal monitoring, risk prediction, and clinical decision support. The paper also emphasizes that healthcare AI should consider explainability, bias, privacy, regulation, workflow integration, and equity. For our project, this paper provides the broader clinical motivation for AI-assisted fetal health assessment, while the base paper provides the specific CTG-based machine-learning methodology that we are extending.
+
+---
+
+## 37. One-Line Connection to Our Project
+
+> Supporting Paper 2 provides the broader clinical and technological context for AI-assisted fetal monitoring and risk assessment, while our project applies these principles specifically to CTG data through an optimized, ensemble-based and explainable machine-learning framework.
+
+---
+
+## 38. Final Takeaway
+
+The central lesson from this paper is that developing a healthcare AI system is not only about building a predictive model.
+
+A complete healthcare AI framework should consider:
+
+Performance
++
+Explainability
++
+Validation
++
+Bias
++
+Privacy
++
+Workflow Integration
++
+Clinical Oversight
++
+Monitoring
+
+For our project, this broader perspective helps us move beyond a simple CTG classification model toward an AI-assisted framework focused on optimization, ensemble learning, explainability, and early fetal health risk assessment.
+
+The paper therefore serves as a **supporting clinical and technological reference** for our project rather than as the direct source of our CTG modelling methodology.
