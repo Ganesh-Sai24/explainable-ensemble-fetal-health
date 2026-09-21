@@ -1,0 +1,854 @@
+
+
+# Supporting Paper 1 Analysis
+
+## Application of Artificial Intelligence in Diagnosis and Management of Fetal Growth Disorders: A Comprehensive Review
+
+**Authors:** Franciszek Ługowski, Julia Babińska, Paweł Jan Stanirowski
+**Journal:** Frontiers in Medicine
+**Publication Year:** 2026
+**Article:** Front. Med. 12:1737391
+**DOI:** 10.3389/fmed.2025.1737391
+**Article Type:** Review
+**Published:** 16 January 2026
+
+---
+
+## 1. Overview
+
+This paper is a comprehensive review of the application of Artificial Intelligence (AI) in the diagnosis and management of fetal growth disorders.
+
+The review mainly covers:
+
+* Fetal Growth Restriction (FGR)
+* Small-for-Gestational-Age (SGA)
+* Large-for-Gestational-Age (LGA)
+* Fetal macrosomia
+
+It discusses the use of Machine Learning (ML), Deep Learning (DL), and other AI approaches for fetal assessment, prediction, risk stratification, and clinical decision support.
+
+The paper also discusses the use of different types of data, including ultrasound, Doppler measurements, maternal characteristics, biochemical markers, and genetic information.
+
+A major theme of the review is that AI has significant potential in fetal assessment, but further validation, clinical integration, ethical considerations, privacy protection, and regulatory development are required before widespread clinical adoption.
+
+---
+
+## 2. Why This Paper Is Relevant to Our Project
+
+Our project is titled:
+
+**An Optimized Explainable Ensemble Learning Framework for AI-Assisted Early Fetal Health Risk Assessment Using Cardiotocography Data**
+
+This paper is relevant because it provides the broader clinical and research context for AI-assisted fetal assessment.
+
+Our **base paper** focuses specifically on CTG-based fetal health classification. This supporting paper looks at a much broader range of fetal assessment methods, particularly ultrasound, Doppler, maternal information, biomarkers, and genetic information.
+
+The paper is useful to our project for understanding:
+
+* how AI is being applied in fetal assessment,
+* how ML and DL are used for prediction,
+* the importance of risk assessment,
+* the role of explainability,
+* the use of multiple sources of information,
+* and the challenges involved in clinical deployment.
+
+Therefore, this paper provides the **broader research motivation**, while our base paper provides the **direct CTG-based technical foundation**.
+
+---
+
+## 3. Main Problem Discussed in the Paper
+
+The paper focuses on the challenges involved in detecting and managing fetal growth disorders.
+
+Traditional fetal growth assessment relies heavily on clinical measurements and ultrasound examination. The review highlights that these processes can be affected by factors such as:
+
+* operator experience,
+* measurement variability,
+* differences between observers,
+* availability of specialized infrastructure,
+* and the complexity of fetal growth patterns.
+
+AI can potentially assist by learning patterns from large amounts of maternal and fetal information.
+
+The general concept is:
+
+**Clinical Data → AI Analysis → Prediction/Risk Assessment → Clinical Decision Support**
+
+The paper presents AI as a tool that can assist healthcare professionals rather than automatically replacing clinical judgment.
+
+---
+
+## 4. Fetal Growth Disorders Discussed
+
+### 4.1 Fetal Growth Restriction (FGR)
+
+Fetal Growth Restriction refers to a fetus that does not achieve its genetically determined growth potential because of pathological factors.
+
+The review discusses factors associated with FGR, including:
+
+* placental insufficiency,
+* nutritional deficiencies,
+* hypertensive disorders,
+* and fetal abnormalities.
+
+FGR assessment can involve:
+
+* estimated fetal weight,
+* abdominal circumference,
+* Doppler measurements,
+* and fetal growth velocity.
+
+---
+
+### 4.2 Small-for-Gestational-Age (SGA)
+
+Small-for-Gestational-Age generally refers to a fetus whose estimated fetal weight is below the 10th percentile for gestational age.
+
+An important point from the review is that **SGA and FGR are not identical**.
+
+A fetus can be constitutionally small without having pathological growth restriction. Therefore, identifying a fetus as SGA does not automatically mean that the fetus has FGR.
+
+---
+
+### 4.3 Large-for-Gestational-Age (LGA)
+
+Large-for-Gestational-Age refers to a fetus whose estimated fetal weight is at or above the 90th percentile for gestational age.
+
+The review discusses AI models that use combinations of:
+
+* maternal characteristics,
+* metabolic information,
+* ultrasound measurements,
+* and other clinical information
+
+to predict LGA.
+
+---
+
+### 4.4 Fetal Macrosomia
+
+The review discusses fetal macrosomia in relation to an estimated fetal weight exceeding approximately 4,000 g.
+
+Accurate prediction of excessive fetal weight can be difficult using conventional measurements alone.
+
+AI-based approaches can combine maternal, metabolic, and ultrasound information for improved prediction.
+
+---
+
+## 5. AI Approaches Discussed
+
+The review discusses several types of AI techniques.
+
+### Machine Learning
+
+Examples include:
+
+* Support Vector Machines
+* Random Forest
+* Decision Trees
+* Logistic Regression
+* Multilayer Perceptrons
+
+### Deep Learning
+
+Examples include:
+
+* Convolutional Neural Networks
+* Deep learning models for ultrasound images
+* Gated Recurrent Units
+* Attention-based approaches
+
+### Explainable AI
+
+The paper also discusses Explainable AI as an important direction for making AI-based predictions more interpretable.
+
+---
+
+## 6. Types of Data Used
+
+A major point from the review is that fetal assessment can use multiple sources of information.
+
+### Ultrasound Data
+
+* Ultrasound images
+* Ultrasound videos
+* Fetal biometric measurements
+* Estimated fetal weight
+* Abdominal circumference
+* Head circumference
+* Femur length
+
+### Doppler Data
+
+* Uterine artery indices
+* Fetal hemodynamic measurements
+* Doppler waveform information
+
+### Maternal Data
+
+* Maternal age
+* BMI
+* Parity
+* Medical history
+* Hypertension
+* Diabetes
+* Reproductive history
+
+### Biochemical Data
+
+* Serum biomarkers
+* Placental proteins
+* Metabolites
+* Inflammatory markers
+
+### Genetic Data
+
+* Cell-free DNA
+* Nucleosome profiling
+* Genomic information
+
+This demonstrates the broader movement toward using multiple sources of information for fetal risk assessment.
+
+---
+
+## 7. Fetal Biometry and AI
+
+Fetal biometry is an important application discussed in the review.
+
+The major biometric measurements include:
+
+* Biparietal Diameter (BPD)
+* Head Circumference (HC)
+* Abdominal Circumference (AC)
+* Femur Length (FL)
+
+AI can be used to automatically identify and measure fetal anatomical structures from ultrasound images.
+
+The review discusses the use of models such as convolutional neural networks and Random Forest for automated biometric assessment.
+
+Deep learning can also be used for fetal anatomical segmentation.
+
+---
+
+## 8. Benefits of AI-Assisted Fetal Biometry
+
+The review describes several potential benefits:
+
+* reduced operator dependence,
+* reduced inter-observer variability,
+* shorter examination time,
+* improved consistency,
+* improved diagnostic support,
+* and potential usefulness in low-resource settings.
+
+The paper discusses studies where AI-assisted assessment reduced examination time compared with manual assessment.
+
+One cited study reported approximately **14.32 minutes** for AI-assisted scanning compared with approximately **21.93 minutes** for manual assessment.
+
+These values belong to the individual study discussed in the review.
+
+---
+
+## 9. AI for Fetal Growth Restriction
+
+FGR is one of the major conditions discussed in the review.
+
+The studies reviewed use combinations of:
+
+* maternal characteristics,
+* biochemical markers,
+* Doppler information,
+* genetic information,
+* fetal measurements,
+* and other clinical variables.
+
+One cited study used Support Vector Machine and Multilayer Perceptron models for FGR detection.
+
+The reported predictive accuracies were:
+
+* **SVM: 95.5%**
+* **MLP: 88.5%**
+
+The review also discusses approaches based on metabolomic and biochemical information.
+
+These values represent results from individual studies discussed in the review and are not experimental results generated by the review authors.
+
+---
+
+## 10. Multimodal Data Integration
+
+One of the important concepts in this paper is **multimodal data integration**.
+
+Instead of relying on one information source, AI systems can combine:
+
+**Maternal Information + Ultrasound + Doppler + Biomarkers + Genetic Information**
+
+to generate a risk assessment.
+
+The general concept is:
+
+**Multiple Data Sources → Data Integration → AI Model → Risk Assessment**
+
+This demonstrates how AI systems can potentially capture relationships that may not be visible when only one type of information is considered.
+
+For our project, this provides broader context for developing a framework that combines complementary machine-learning approaches.
+
+---
+
+## 11. AI for SGA Detection
+
+The review discusses deep-learning approaches for identifying SGA fetuses using ultrasound data.
+
+One cited study used more than:
+
+**433,000 ultrasound images**
+
+from more than:
+
+**65,000 examinations**.
+
+The reported sensitivity was approximately:
+
+* Deep learning model: **70%**
+* Hadlock estimation: **58%**
+
+The reported specificity of the AI model was approximately **91%**.
+
+The review also notes that retrospective and single-center studies may have limited generalizability.
+
+---
+
+## 12. AI for LGA and Fetal Macrosomia
+
+The review discusses AI approaches for predicting excessive fetal growth using combinations of:
+
+* maternal age,
+* BMI,
+* gestational diabetes,
+* maternal weight gain,
+* fetal abdominal circumference,
+* ultrasound information,
+* and other clinical factors.
+
+One cited model reported:
+
+* **AUC: 0.88**
+* **Sensitivity: 83.5%**
+* **Specificity: 80.3%**
+
+The review also discusses explainability analysis identifying factors such as:
+
+* pre-pregnancy BMI,
+* maternal weight gain,
+* fetal abdominal circumference
+
+as important contributors in that particular study.
+
+---
+
+## 13. Explainable AI
+
+Explainability is one of the most relevant concepts from this paper for our project.
+
+A conventional AI system may provide only:
+
+**Prediction → High Risk**
+
+An explainable AI system can additionally provide information about the factors contributing to the prediction.
+
+Conceptually:
+
+**Input Data → AI Model → Prediction + Explanation**
+
+This can help users understand the model's behaviour rather than receiving only an unexplained output.
+
+For our project, this concept directly supports the **Explainable** component of our proposed framework.
+
+However, explainability should not be confused with clinical validation. An explanation describes model behaviour; it does not prove that the prediction is medically correct.
+
+---
+
+## 14. Why Explainability Matters in Healthcare
+
+The review highlights the importance of interpretable AI in healthcare.
+
+Explainability can help with:
+
+* understanding model behaviour,
+* identifying influential variables,
+* supporting clinician review,
+* improving transparency,
+* identifying unexpected model behaviour,
+* and supporting responsible AI deployment.
+
+This is particularly relevant to our project because we are not only interested in producing a classification result; we also want to investigate how the model reaches that result.
+
+---
+
+## 15. AI as Clinical Decision Support
+
+The review presents AI as a potential clinical decision-support component.
+
+A generalized workflow is:
+
+**Clinical Data Collection**
+↓
+**Ultrasound / Doppler / Other Data Acquisition**
+↓
+**Preprocessing and Feature Extraction**
+↓
+**Data Integration**
+↓
+**AI Model**
+↓
+**Prediction**
+↓
+**Clinical Interpretation**
+↓
+**Decision Support**
+
+This supports the idea that AI should be integrated into the clinical workflow rather than treated as an isolated prediction mechanism.
+
+---
+
+## 16. Challenges Identified by the Paper
+
+The review also discusses important limitations in current AI research.
+
+### 16.1 Retrospective Studies
+
+Many studies use previously collected data rather than evaluating models prospectively in real clinical environments.
+
+### 16.2 Small Sample Sizes
+
+Small datasets can increase the risk of:
+
+* overfitting,
+* unstable performance,
+* and poor generalization.
+
+### 16.3 Limited External Validation
+
+A model may perform well on its development dataset but perform differently on data from:
+
+* another hospital,
+* another geographical region,
+* another population,
+* or another healthcare system.
+
+Therefore:
+
+**Internal Validation ≠ Guaranteed Generalization**
+
+---
+
+## 17. Overfitting
+
+The review identifies overfitting as an important challenge.
+
+A model may learn the training data extremely well but fail to generalize to unseen data.
+
+The basic concept is:
+
+**Training Data → Model Learns Specific Patterns → High Training Performance → Poor Performance on New Data**
+
+Therefore, a high performance score on one dataset does not automatically establish clinical reliability.
+
+This is an important consideration for our project as well.
+
+---
+
+## 18. Population Bias
+
+The review discusses the possibility of population bias.
+
+If an AI model is developed using a narrow population, its performance may not remain the same when applied to another population.
+
+This can result in:
+
+* reduced generalizability,
+* unequal performance,
+* and potential health inequities.
+
+This highlights the importance of diverse and representative datasets for future clinical deployment.
+
+---
+
+## 19. Infrastructure and Technical Challenges
+
+The review identifies practical barriers such as:
+
+* computational requirements,
+* limited infrastructure,
+* difficulty integrating AI with existing clinical systems,
+* limited technical expertise,
+* hardware requirements,
+* software requirements,
+* and training requirements for healthcare professionals.
+
+Therefore, good model performance alone does not guarantee successful clinical deployment.
+
+---
+
+## 20. Privacy and Security
+
+AI-based fetal assessment can involve sensitive information such as:
+
+* maternal data,
+* fetal information,
+* ultrasound images,
+* clinical records,
+* genetic information,
+* and laboratory data.
+
+The review emphasizes the importance of:
+
+* data security,
+* patient privacy,
+* regulatory compliance,
+* responsible data storage,
+* and patient trust.
+
+---
+
+## 21. Ethical and Legal Considerations
+
+The review discusses ethical and legal questions surrounding AI-assisted healthcare.
+
+An important question is:
+
+**Who is responsible if an AI-assisted prediction is incorrect?**
+
+Potential stakeholders include:
+
+* clinicians,
+* hospitals,
+* software developers,
+* and AI system providers.
+
+The paper highlights the need for appropriate legal and regulatory frameworks before widespread clinical deployment.
+
+---
+
+## 22. Clinical Translation
+
+The review discusses several steps required for moving AI from research toward clinical use.
+
+### Prospective Validation
+
+Models should eventually be evaluated prospectively.
+
+### Multicenter Validation
+
+Models should be tested across multiple institutions and populations.
+
+### Clinical-System Integration
+
+AI should be integrated with existing clinical systems and workflows.
+
+### Regulatory Approval
+
+Systems must satisfy relevant regulatory requirements.
+
+### Implementation Studies
+
+Real-world studies should consider:
+
+* cost-effectiveness,
+* workflow impact,
+* clinician acceptance,
+* patient acceptance,
+* and practical usability.
+
+---
+
+## 23. Important Lesson for Our Project
+
+A strong result on a single dataset does not automatically establish clinical reliability.
+
+Therefore, if our project is evaluated using the UCI CTG dataset, our results should be described as:
+
+**Experimental results on the selected dataset.**
+
+We should not claim that our system is clinically proven.
+
+A scientifically appropriate statement is:
+
+> Further external and prospective validation would be required before clinical deployment.
+
+---
+
+## 24. How This Paper Supports Our Project
+
+This paper supports our project in several ways.
+
+### AI in Fetal Assessment
+
+It provides broader evidence that AI is being investigated for fetal assessment.
+
+### Risk Assessment
+
+It discusses AI-based prediction and risk stratification for fetal conditions.
+
+### Explainability
+
+It highlights the importance of interpretable AI in healthcare.
+
+### Multiple Information Sources
+
+It demonstrates the potential value of combining different sources of clinical information.
+
+### Validation
+
+It emphasizes the importance of proper validation and generalization.
+
+### Clinical Decision Support
+
+It supports positioning AI as an assistance mechanism rather than a replacement for clinicians.
+
+---
+
+## 25. Relationship With the Base Paper
+
+The relationship between the papers is:
+
+**Supporting Paper 1**
+Provides the broader AI and clinical context for fetal assessment.
+
+↓
+
+**Base Paper**
+Provides the direct CTG-based machine-learning methodology, including:
+
+* CTG data,
+* fetal health classes,
+* SMOTE,
+* machine-learning models,
+* cross-validation,
+* balanced accuracy,
+* and model comparison.
+
+↓
+
+**Our Project**
+Extends this foundation through:
+
+* optimization,
+* ensemble learning,
+* explainable AI,
+* and AI-assisted fetal health risk assessment.
+
+Therefore, Supporting Paper 1 is mainly a **context and motivation paper**, while the base paper is the **technical foundation** of our project.
+
+---
+
+## 26. Supporting Paper 1 vs Base Paper
+
+| Aspect               | Supporting Paper 1              | Base Paper                            |
+| -------------------- | ------------------------------- | ------------------------------------- |
+| Paper type           | Comprehensive review            | Original research                     |
+| Main focus           | AI in fetal growth disorders    | CTG-based fetal health classification |
+| Data                 | Multiple modalities             | CTG dataset                           |
+| Ultrasound           | Major focus                     | Not primary                           |
+| Doppler              | Discussed                       | Not central                           |
+| Biomarkers           | Discussed                       | Not central                           |
+| Genetic data         | Discussed                       | Not central                           |
+| CTG                  | Not primary                     | Central                               |
+| Machine Learning     | Reviewed                        | Experimentally evaluated              |
+| Deep Learning        | Reviewed                        | DNN experimentally evaluated          |
+| SMOTE                | Not central                     | Important methodology                 |
+| Balanced Accuracy    | Not central                     | Important metric                      |
+| Explainability       | Discussed                       | Feature importance used               |
+| Ensemble Learning    | Discussed in broader literature | Models mainly compared individually   |
+| External Validation  | Major challenge                 | Limited by dataset and study design   |
+| Clinical Translation | Major focus                     | Decision-support/interface direction  |
+
+---
+
+## 27. Research Gap Supported by This Paper
+
+This review shows that AI-based fetal assessment is moving toward:
+
+* automated assessment,
+* machine learning,
+* deep learning,
+* explainable AI,
+* multimodal learning,
+* risk prediction,
+* personalized monitoring,
+* and clinical decision support.
+
+At the same time, it highlights challenges involving:
+
+* generalization,
+* external validation,
+* overfitting,
+* population bias,
+* infrastructure,
+* privacy,
+* regulation,
+* and clinical integration.
+
+Our project addresses this broader research direction specifically within the CTG-based fetal health classification problem.
+
+Our proposed framework focuses on:
+
+**Optimization + Ensemble Learning + Explainable AI**
+
+for:
+
+**AI-Assisted Early Fetal Health Risk Assessment**
+
+---
+
+## 28. What We Take From This Paper
+
+The main lessons we take from this paper are:
+
+1. AI has applications across multiple areas of fetal assessment.
+2. Different clinical data sources can be used for fetal risk assessment.
+3. ML and DL can identify complex patterns in fetal-related data.
+4. Explainability is important for understanding AI predictions.
+5. High internal performance does not guarantee generalization.
+6. External and prospective validation are important for clinical translation.
+7. Privacy, ethics, regulation, and infrastructure must be considered.
+8. AI should support clinical decision-making rather than automatically replace clinicians.
+
+---
+
+## 29. What We Do Not Take Directly From This Paper
+
+This paper is a review and does not provide the direct implementation methodology for our CTG classification system.
+
+Therefore, we should not say that our project directly obtained:
+
+* the UCI CTG dataset from this paper,
+* the SMOTE methodology from this paper,
+* the LightGBM baseline from this paper,
+* or the exact CTG classification pipeline from this paper.
+
+Those aspects come primarily from our **base paper**.
+
+This supporting paper instead contributes:
+
+* broader clinical motivation,
+* understanding of AI in fetal assessment,
+* awareness of multimodal approaches,
+* importance of explainability,
+* understanding of validation challenges,
+* and clinical translation considerations.
+
+---
+
+## 30. Viva Questions
+
+### Q1. What is Supporting Paper 1 about?
+
+It is a comprehensive review of the application of AI in the diagnosis and management of fetal growth disorders, including FGR, SGA, LGA, and fetal macrosomia.
+
+### Q2. Why did you select this paper?
+
+We selected it because it provides broader clinical and research context for AI-assisted fetal assessment and discusses machine learning, deep learning, explainable AI, multimodal data, and clinical deployment challenges.
+
+### Q3. Is this paper directly based on CTG?
+
+No. It mainly discusses ultrasound, Doppler, maternal characteristics, biomarkers, genetic information, and other fetal-assessment modalities. Our base paper is the direct CTG-based technical foundation.
+
+### Q4. What is FGR?
+
+FGR is a pathological condition in which a fetus fails to achieve its genetically determined growth potential.
+
+### Q5. What is the difference between SGA and FGR?
+
+SGA is primarily a size-based classification, whereas FGR refers to pathological restriction of fetal growth. Therefore, an SGA fetus is not necessarily growth-restricted.
+
+### Q6. What is multimodal data integration?
+
+It means combining different types of information, such as maternal characteristics, ultrasound, Doppler, biomarkers, and genetic data, for AI-based prediction or risk assessment.
+
+### Q7. Why is explainability important?
+
+It helps users understand why an AI system generated a particular prediction and can improve transparency and support clinical review.
+
+### Q8. What is a major limitation identified by this review?
+
+Limited external and prospective validation is a major concern. Many studies are retrospective, single-center, or based on limited datasets.
+
+### Q9. Does high accuracy mean an AI model is clinically ready?
+
+No. Clinical deployment also requires external validation, prospective evaluation, diverse populations, regulatory approval, privacy protection, infrastructure, cost-effectiveness analysis, and clinical workflow evaluation.
+
+### Q10. How does this paper support your project?
+
+It provides the broader motivation for AI-assisted fetal assessment and emphasizes the importance of robust, explainable, and clinically usable AI systems. Our project applies these principles specifically to CTG-based fetal health risk assessment.
+
+---
+
+## 31. Short Presentation Explanation
+
+If the panel asks:
+
+**"What is Supporting Paper 1?"**
+
+A concise answer is:
+
+> Supporting Paper 1 is a 2026 comprehensive review published in *Frontiers in Medicine* that examines the use of artificial intelligence in the diagnosis and management of fetal growth disorders such as FGR, SGA, LGA, and fetal macrosomia. It reviews machine learning, deep learning, ultrasound analysis, Doppler-based approaches, maternal characteristics, biomarkers, genetic information, and explainable AI. The review shows the potential of AI for fetal assessment while also identifying challenges such as overfitting, limited external validation, population bias, privacy, regulation, infrastructure, and clinical integration. This paper provides the broader clinical and research context for our AI-assisted fetal health risk assessment project.
+
+---
+
+## 32. One-Line Connection to Our Project
+
+> **Supporting Paper 1 provides the broader clinical and research context for AI-assisted fetal assessment, while the base paper provides the CTG-specific machine-learning foundation that our project extends through optimization, ensemble learning, and explainability.**
+
+---
+
+## 33. Key Numbers to Remember
+
+The following numbers are associated with individual studies discussed in the review:
+
+* **2026** — publication year of the review
+* **23.4 million** — estimated SGA births globally in 2020, as cited by the review
+* **15–20%** — reported LGA prevalence in developed countries
+* **4,000 g** — fetal macrosomia threshold discussed in the review
+* **95.5%** — SVM predictive accuracy reported in one cited FGR study
+* **88.5%** — MLP predictive accuracy reported in the same cited FGR study
+* **0.90 AUC** — reported for a metabolite-panel model discussed for FGR
+* **433,000+** — ultrasound images used in one cited SGA deep-learning study
+* **70%** — reported sensitivity for that deep-learning SGA model
+* **91%** — reported specificity for that model
+* **0.88 AUC** — reported for a cited macrosomia model
+* **83.5%** — reported sensitivity for that model
+* **80.3%** — reported specificity for that model
+
+These values belong to different studies reviewed in the paper and should not be presented as results produced by the review authors.
+
+---
+
+## 34. Final Takeaway
+
+The central message from Supporting Paper 1 is:
+
+> **AI has significant potential for fetal assessment, but clinically useful AI requires more than high predictive performance. It also requires interpretability, robustness, appropriate validation, responsible development, and practical clinical integration.**
+
+For our project, this supports the following research direction:
+
+**Broader AI in Fetal Assessment**
+↓
+**Need for Reliable Prediction**
+↓
+**CTG-Based Fetal Health Classification**
+↓
+**Base Paper Methodology**
+↓
+**Optimization + Ensemble Learning + Explainable AI**
+↓
+**AI-Assisted Fetal Health Risk Assessment**
+
+The supporting paper therefore strengthens the **clinical motivation and broader research context** of our project, while the base paper provides the **direct technical foundation** for our CTG-based machine-learning work.
+
+---
+
+## Reference
+
+Ługowski, F., Babińska, J., & Stanirowski, P. J. (2026). *Application of Artificial Intelligence in Diagnosis and Management of Fetal Growth Disorders: A Comprehensive Review*. **Frontiers in Medicine, 12**, 1737391.
+
