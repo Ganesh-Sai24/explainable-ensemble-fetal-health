@@ -1,0 +1,1871 @@
+# Supporting Paper 3 Analysis
+
+## Paper Details
+
+**Title:** Early detection of fetal health status based on cardiotocography using artificial intelligence
+
+**Authors:** Sara S. Ahmed, Nourelhoda M. Mahmoud
+
+**Journal:** Neural Computing and Applications
+
+**Year:** 2025
+
+**Volume:** 37
+
+**Pages:** 16753–16779
+
+**DOI:** 10.1007/s00521-025-11343-x
+
+**Paper Type:** Research Article
+
+**Publication Date:** 5 June 2025
+
+**Dataset:** UCI Cardiotocography Dataset
+
+---
+
+# 1. What is this paper about?
+
+This paper proposes an Artificial Intelligence based framework for predicting fetal health status from Cardiotocography (CTG) data.
+
+The authors investigate a large collection of Machine Learning (ML), Deep Learning (DL), ensemble learning, feature selection, preprocessing, data balancing, and hyperparameter tuning techniques.
+
+The fetal health problem is treated as a **three-class classification problem**:
+
+1. Normal
+2. Suspect
+3. Pathological
+
+The main objective is to improve prediction accuracy and develop a model that could potentially support early fetal health assessment.
+
+The paper evaluates:
+
+- 7 Machine Learning models
+- 5 Deep Learning models
+- Ensemble models
+- H2O.ai models
+- Lazy Predict models
+- Multiple preprocessing techniques
+- SMOTE for class balancing
+- Feature selection
+- PCA
+- Hyperparameter tuning using Grid Search
+- Five-fold cross-validation
+
+The main proposed model is a **Stacking Classifier**, which combines multiple ML models.
+
+The final reported performance of the proposed stacking classifier is:
+
+- Accuracy: **98.9%**
+- Precision: **99.0%**
+- Recall: **98.6%**
+- F1-score: **99.3%**
+- ROC-AUC: **99.8%**
+
+The paper therefore demonstrates that combining preprocessing, feature selection, SMOTE, hyperparameter tuning, and ensemble learning can substantially improve CTG-based fetal health classification.
+
+---
+
+# 2. Research Objective
+
+The primary objective of the paper is to improve the accuracy of fetal health prediction using AI techniques applied to CTG data.
+
+The authors identify several limitations in previous studies and attempt to address them.
+
+The paper specifically aims to:
+
+- utilize larger and more diverse datasets,
+- improve model robustness,
+- investigate explainable AI,
+- use rigorous validation,
+- predict multiple fetal health outcomes,
+- use advanced data augmentation,
+- improve model performance,
+- reduce prediction time,
+- investigate multiple ML and DL models,
+- apply feature engineering,
+- perform hyperparameter tuning,
+- investigate ensemble learning.
+
+The authors particularly focus on improving classification of the three fetal health states:
+
+**Normal → Suspect → Pathological**
+
+---
+
+# 3. Problem Addressed
+
+The paper identifies several problems with conventional CTG analysis.
+
+## 3.1 Subjective CTG interpretation
+
+Traditional CTG interpretation depends heavily on clinicians visually examining:
+
+- Fetal Heart Rate (FHR)
+- Uterine Contractions (UC)
+- Variability
+- Accelerations
+- Decelerations
+- Other CTG characteristics
+
+The authors state that this process can be time-consuming and subjective.
+
+Different clinicians may interpret ambiguous CTG patterns differently.
+
+---
+
+## 3.2 Large amount of CTG data
+
+Continuous CTG monitoring produces large quantities of information.
+
+Manually analyzing all this information can consume considerable clinical time.
+
+AI can potentially process these features automatically and provide a prediction.
+
+---
+
+## 3.3 Class imbalance
+
+The UCI CTG dataset contains significantly more Normal cases than Suspect and Pathological cases.
+
+The class distribution is:
+
+| Class | Samples | Percentage |
+|---|---:|---:|
+| Normal | 1,655 | 77.8% |
+| Suspect | 295 | 13.9% |
+| Pathological | 176 | 8.28% |
+| **Total** | **2,126** | **100%** |
+
+Therefore, the dataset is highly imbalanced.
+
+The authors use **SMOTE** to address this problem.
+
+---
+
+## 3.4 Limited performance of individual models
+
+Previous studies have obtained good results using individual ML or DL models, but the authors investigate whether combining multiple models can further improve classification.
+
+This leads to the use of ensemble learning, especially the **Stacking Classifier**.
+
+---
+
+# 4. Dataset
+
+The paper uses the publicly available **UCI Cardiotocography Dataset**.
+
+The dataset contains:
+
+- **2,126 CTG records**
+- **21 input features**
+- **3 target classes**
+- No missing attributes
+
+The records correspond to pregnant women in their third trimester.
+
+The CTG information includes measurements related to:
+
+- fetal heart rate,
+- fetal movement,
+- uterine contractions,
+- accelerations,
+- decelerations,
+- short-term variability,
+- long-term variability,
+- histogram characteristics.
+
+Three expert obstetricians categorized the CTG records into:
+
+1. Normal
+2. Suspect
+3. Pathological
+
+The classification follows the specifications mentioned in the paper from the National Institute of Child Health and Human Development.
+
+---
+
+# 5. Input Features
+
+The paper states that the UCI dataset contains 21 features.
+
+They include:
+
+1. Accelerations
+2. Baseline value
+3. Fetal movement
+4. Light decelerations
+5. Uterine contractions
+6. Severe decelerations
+7. Prolonged decelerations
+8. Short-term variability mean
+9. Abnormal short-term variability
+10. Abnormal long-term variability
+11. Histogram width
+12. Histogram minimum
+13. Histogram maximum
+14. Long-term variability mean
+15. Histogram number of peaks
+16. Histogram number of zeroes
+17. Histogram mean
+18. Histogram median
+19. Histogram tendency
+20. Histogram variance
+21. Histogram mode
+
+The target variable represents the fetal health state.
+
+---
+
+# 6. Overall Methodology
+
+The overall workflow is illustrated in **Figure 1 of the paper, page 6**.
+
+The general pipeline is:
+
+```text
+UCI CTG Dataset
+        ↓
+Preprocessing
+        ↓
+Data Augmentation using SMOTE
+        ↓
+Train/Test Split
+        ↓
+Feature Selection / Extraction
+        ↓
+Grid Search + Hyperparameter Tuning
+        ↓
+ML / DL Models
+        ↓
+Model Validation
+        ↓
+Classification
+        ↓
+Normal / Suspect / Pathological
+````
+
+The paper investigates multiple variations of this pipeline through ten different scenarios.
+
+---
+
+# 7. Data Preprocessing
+
+The authors investigate multiple preprocessing approaches.
+
+The major preprocessing techniques are:
+
+* Outlier removal
+* Standardization
+* Normalization
+* SMOTE
+* Feature selection
+* Correlation-based filtering
+* PCA
+* Hyperparameter tuning
+
+The authors do not use one single preprocessing configuration from the beginning.
+
+Instead, they construct **ten scenarios** to study how different preprocessing combinations affect model performance.
+
+---
+
+# 8. Outlier Removal
+
+The authors investigate two approaches for detecting and removing outliers:
+
+## 8.1 Interquartile Range (IQR)
+
+The IQR method uses:
+
+```text
+IQR = Q3 - Q1
+```
+
+where:
+
+* Q1 = first quartile
+* Q3 = third quartile
+
+It is useful for identifying values that lie outside the expected distribution.
+
+---
+
+## 8.2 Standard Deviation Method
+
+The authors also investigate a method based on three standard deviations.
+
+Values beyond approximately:
+
+```text
+Mean ± 3 × Standard Deviation
+```
+
+are treated as outliers.
+
+Different scenarios use either IQR-based or standard-deviation-based outlier removal.
+
+---
+
+# 9. Data Scaling
+
+The paper investigates two major scaling techniques.
+
+## 9.1 Standardization
+
+Standardization transforms the feature distribution so that it approximately has:
+
+* mean = 0
+* standard deviation = 1
+
+This is especially useful when different features have very different numerical ranges.
+
+---
+
+## 9.2 Normalization
+
+Normalization maps feature values into a bounded range using the minimum and maximum values.
+
+Conceptually:
+
+```text
+Normalized Value =
+(Value - Minimum) / (Maximum - Minimum)
+```
+
+The paper evaluates both standardization and normalization in different scenarios.
+
+---
+
+# 10. SMOTE
+
+One of the important techniques used in the paper is:
+
+**Synthetic Minority Oversampling Technique (SMOTE)**.
+
+The original dataset is imbalanced because the Normal class contains most of the observations.
+
+SMOTE creates synthetic samples for minority classes.
+
+Instead of simply duplicating existing minority samples, SMOTE generates new synthetic samples by interpolating between existing minority-class observations.
+
+The purpose is to create a more balanced training dataset.
+
+The paper uses SMOTE as a major data augmentation strategy.
+
+---
+
+# 11. Train-Test Split
+
+The dataset is divided into:
+
+* **75% training data**
+* **25% test data**
+
+Approximately 1,600 samples are used for training.
+
+The remaining approximately 25% are used as an independent test set.
+
+The paper states that the test set is not used during model training.
+
+This is important because the model should be evaluated on data it has not seen during training.
+
+---
+
+# 12. Feature Selection
+
+Feature selection is an important component of the proposed methodology.
+
+The authors investigate several feature selection and dimensionality reduction techniques.
+
+These include:
+
+* Removing highly correlated features
+* Chi-squared test
+* Mutual Information
+* Extra Trees Classifier
+* Pearson correlation
+* Principal Component Analysis (PCA)
+
+---
+
+# 13. Removing Highly Correlated Features
+
+Highly correlated features may contain similar information.
+
+The authors therefore remove highly correlated features in one of the scenarios.
+
+The objective is to:
+
+* reduce redundancy,
+* reduce model complexity,
+* reduce possible overfitting,
+* improve interpretability,
+* improve generalization.
+
+In Scenario 4, three highly correlated features are removed.
+
+---
+
+# 14. Chi-Squared Feature Selection
+
+The Chi-squared method is used in Scenario 5.
+
+The method selects the most relevant features according to the chi-squared statistical relationship between features and the target.
+
+The paper selects the **top 10 features** using this technique.
+
+---
+
+# 15. Mutual Information
+
+Mutual Information is used in Scenario 9.
+
+It measures the amount of information shared between variables.
+
+One advantage is that it can identify nonlinear relationships.
+
+The authors use Mutual Information to select **16 informative features**.
+
+---
+
+# 16. Extra Trees Feature Selection
+
+Extra Trees is also used as a feature selection technique.
+
+The method evaluates feature importance using multiple decision trees.
+
+The authors use Extra Trees-based selection in Scenarios 6, 7, and 8.
+
+These scenarios select **18 important features**.
+
+---
+
+# 17. Pearson Correlation
+
+Pearson correlation measures the relationship between numerical variables.
+
+Its value ranges from:
+
+```text
+-1 to +1
+```
+
+where:
+
+* +1 → strong positive relationship
+* 0 → no linear relationship
+* -1 → strong negative relationship
+
+The paper uses Pearson correlation along with highly correlated feature removal.
+
+Scenario 4 finally selects **15 features**.
+
+---
+
+# 18. PCA
+
+Principal Component Analysis (PCA) is used as a dimensionality reduction technique.
+
+Instead of keeping all original features, PCA transforms them into new variables called:
+
+**Principal Components**
+
+The objective is to preserve important information while reducing dimensionality.
+
+PCA is used in Scenarios:
+
+* S6
+* S7
+* S8
+* S9
+
+---
+
+# 19. Hyperparameter Tuning
+
+The paper uses **Grid Search** for hyperparameter optimization.
+
+Hyperparameters are model settings that are chosen before training.
+
+Examples include:
+
+* number of trees,
+* tree depth,
+* kernel parameters,
+* number of neighbors,
+* learning-related parameters.
+
+Grid Search evaluates different combinations of predefined hyperparameter values.
+
+The authors use `GridSearchCV` from Scikit-learn.
+
+Hyperparameter tuning is systematically applied in:
+
+* Scenario 7
+* Scenario 8
+* Scenario 9
+* Scenario 10
+
+---
+
+# 20. Machine Learning Models
+
+The paper evaluates seven main ML models:
+
+1. k-Nearest Neighbors (KNN)
+2. Support Vector Machine (SVM)
+3. Random Forest (RF)
+4. Extra Trees (ET)
+5. LightGBM (LGBM)
+6. Voting Classifier
+7. Stacking Classifier
+
+---
+
+# 21. Deep Learning Models
+
+The paper evaluates five DL models:
+
+1. Simple RNN
+2. LSTM
+3. MLP
+4. TabNet
+5. ANN
+
+The authors also construct ensemble/meta-classifier combinations involving DL models.
+
+---
+
+# 22. Ensemble Learning
+
+Ensemble learning is one of the most important concepts in this paper.
+
+Instead of depending on one model, ensemble learning combines predictions from multiple models.
+
+The objective is to use the strengths of different models and reduce the weaknesses of individual models.
+
+The paper investigates:
+
+* Voting Classifier
+* Stacking Classifier
+* ML + DL meta-classifiers
+
+---
+
+# 23. Voting Classifier
+
+A Voting Classifier combines predictions from multiple base classifiers.
+
+The paper uses:
+
+```text
+SVM + LGBM + Extra Trees
+```
+
+for its soft voting classifier.
+
+In soft voting, the predicted probabilities from the base models are combined and the class with the highest combined probability is selected.
+
+---
+
+# 24. Stacking Classifier
+
+The Stacking Classifier is the most important model in this paper.
+
+It combines multiple base models and uses another model as a meta-classifier.
+
+The paper uses:
+
+```text
+SVM
+   +
+Extra Trees
+   +
+LGBM
+   ↓
+Stacking Classifier
+```
+
+The base models generate predictions.
+
+These predictions are then provided to the meta-classifier, which learns how to combine them to produce the final classification.
+
+This allows the final model to take advantage of the strengths of different classifiers.
+
+---
+
+# 25. Why Stacking is Important in This Paper
+
+The authors report that the Stacking Classifier achieves the strongest overall performance among the evaluated ML models.
+
+The paper attributes this to its ability to combine predictions from multiple models.
+
+For example:
+
+* SVM may capture certain decision boundaries,
+* Extra Trees may capture nonlinear relationships,
+* LGBM may capture powerful tree-based patterns.
+
+The stacking mechanism learns how to combine their outputs.
+
+Therefore, instead of asking:
+
+> Which single model is best?
+
+the approach asks:
+
+> How can the predictions of multiple strong models be combined?
+
+This is highly relevant to our project because our project also focuses on **optimized explainable ensemble learning**.
+
+---
+
+# 26. Deep Learning Results
+
+The paper evaluates the DL models under Scenario 10.
+
+The reported results are:
+
+| Model      | Precision | Recall | F1-score | Accuracy |
+| ---------- | --------: | -----: | -------: | -------: |
+| Simple RNN |     85.3% |  84.0% |    84.6% |    92.0% |
+| MLP        |     85.0% |  93.0% |    89.0% |    92.9% |
+| LSTM       |     88.6% |  89.6% |    89.3% |    93.4% |
+| TabNet     |     95.3% |  95.3% |    95.3% |    95.3% |
+| ANN        |     97.7% |  97.7% |    97.7% |    97.7% |
+
+The ANN achieved the highest accuracy among the individual DL models:
+
+**97.7%**
+
+---
+
+# 27. DL Ensemble Results
+
+The paper also combines DL models.
+
+### Voting Classifier
+
+```text
+TabNet + ANN
+```
+
+Results:
+
+* Precision = 97.3%
+* Recall = 97.3%
+* F1-score = 97.1%
+* Accuracy = 97.3%
+
+### Stacking Classifier
+
+```text
+TabNet + ANN
+```
+
+Results:
+
+* Precision = 97.0%
+* Recall = 96.7%
+* F1-score = 97.0%
+* Accuracy = 96.8%
+
+Therefore, in this experiment, the individual ANN achieved higher accuracy than the DL ensemble combinations.
+
+---
+
+# 28. ML Results
+
+The main ML results are presented in Table 3.
+
+The most important final result is obtained by the Stacking Classifier.
+
+Final stacking performance:
+
+| Metric    |    Result |
+| --------- | --------: |
+| Accuracy  | **98.9%** |
+| Precision | **99.0%** |
+| Recall    | **98.6%** |
+| F1-score  | **99.3%** |
+| ROC-AUC   | **99.8%** |
+
+These are the headline results of the paper.
+
+---
+
+# 29. ML + DL Meta-Classifiers
+
+The paper also combines ML and DL models.
+
+Two combinations are reported:
+
+### Voting
+
+```text
+ANN + Extra Trees + SVM
+```
+
+Results:
+
+* Precision = 98.7%
+* Recall = 98.3%
+* F1-score = 98.3%
+* Accuracy = 98.6%
+
+### Stacking
+
+```text
+ANN + Extra Trees + SVM
+```
+
+Results:
+
+* Precision = 98.6%
+* Recall = 98.3%
+* F1-score = 98.3%
+* Accuracy = 98.6%
+
+These results are slightly below the main ML Stacking Classifier result of 98.9% accuracy.
+
+---
+
+# 30. Ten Experimental Scenarios
+
+One of the major contributions of this paper is the use of ten preprocessing/modeling scenarios.
+
+## S1
+
+Normal dataset.
+
+* No balancing
+* No outlier removal
+
+---
+
+## S2
+
+* Outlier removal
+* Min-Max normalization
+
+---
+
+## S3
+
+* Standardization
+* SMOTE
+
+---
+
+## S4
+
+* Standardization
+* SMOTE
+* Feature extraction/selection
+
+This scenario achieves very strong performance.
+
+---
+
+## S5
+
+* Outlier removal
+* SMOTE
+* Min-Max scaling
+* Chi-squared feature extraction
+
+The paper reports that performance decreased in this scenario.
+
+---
+
+## S6
+
+* Outlier removal
+* SMOTE
+* Standardization
+* Extra Trees feature selection
+* PCA
+
+---
+
+## S7
+
+Uses preprocessing and feature selection along with:
+
+* Grid Search
+* Hyperparameter tuning
+
+---
+
+## S8
+
+Uses optimized preprocessing and feature engineering with:
+
+* Grid Search
+* Hyperparameter tuning
+
+This is one of the strongest scenarios.
+
+---
+
+## S9
+
+Uses another optimized combination involving:
+
+* SMOTE
+* feature selection
+* PCA/feature engineering
+* hyperparameter tuning
+
+This also produces very strong results.
+
+---
+
+## S10
+
+Applied to Deep Learning models.
+
+The main preprocessing technique is:
+
+* Standardization
+
+---
+
+# 31. Five-Fold Cross-Validation
+
+The paper uses five-fold cross-validation for the fundamental algorithms in Scenarios:
+
+* S7
+* S8
+* S9
+* S10
+
+The dataset is divided into five subsets.
+
+For each iteration:
+
+```text
+4 folds → Training
+1 fold → Validation
+```
+
+This process is repeated five times.
+
+Every subset is used once as the evaluation subset.
+
+The purpose is to examine how well the model generalizes to unseen data and reduce the risk of relying on a single split.
+
+---
+
+# 32. Evaluation Metrics
+
+The paper uses several metrics.
+
+## Accuracy
+
+Measures the proportion of correctly classified samples.
+
+```text
+Accuracy =
+Correct Predictions / Total Predictions
+```
+
+---
+
+## Precision
+
+Measures how many predicted positive cases are actually positive.
+
+```text
+Precision =
+TP / (TP + FP)
+```
+
+---
+
+## Recall
+
+Measures how many actual positive cases are correctly identified.
+
+```text
+Recall =
+TP / (TP + FN)
+```
+
+---
+
+## F1-score
+
+Combines precision and recall.
+
+```text
+F1 =
+2 × Precision × Recall
+/
+(Precision + Recall)
+```
+
+---
+
+## ROC-AUC
+
+Measures the model's ability to distinguish between classes across classification thresholds.
+
+The paper reports a final ROC-AUC of:
+
+**99.8%**
+
+for the proposed stacking classifier.
+
+---
+
+## Learning Curve
+
+Learning curves are used to investigate model behavior as the amount of training data increases.
+
+They can help identify:
+
+* underfitting,
+* overfitting,
+* generalization behavior.
+
+---
+
+# 33. H2O.ai and Lazy Predict
+
+The paper also investigates automated/model-comparison platforms.
+
+## H2O.ai
+
+H2O.ai provides multiple ML algorithms and automated modeling capabilities.
+
+The paper uses it to compare different algorithms.
+
+---
+
+## Lazy Predict
+
+Lazy Predict provides a convenient way to compare many ML models quickly.
+
+The paper reports that models such as:
+
+* Extra Trees
+* LGBM
+* XGBoost
+* Random Forest
+
+achieved high accuracy in the Lazy Predict comparison.
+
+These platforms are used mainly to explore the model space and identify potentially strong algorithms.
+
+---
+
+# 34. Important Figures
+
+## Figure 1 — System Architecture
+
+**Page 6**
+
+The architecture shows:
+
+```text
+CTG Dataset
+      ↓
+Preprocessing
+      ↓
+Data Augmentation
+      ↓
+Train/Test Split
+      ↓
+Feature Extraction
+      ↓
+Grid Search & Hyperparameter Tuning
+      ↓
+AI Models
+      ↓
+Model Validation
+      ↓
+Classification
+      ↓
+Normal / Suspect / Pathological
+```
+
+This is one of the most important figures for understanding the complete methodology.
+
+---
+
+## Figures 2–4 — Data Scaling
+
+These figures demonstrate the effect of:
+
+* original feature distributions,
+* standardization,
+* normalization.
+
+They visually show why preprocessing is required when CTG features have different numerical ranges.
+
+---
+
+## Figure 5 — PCA
+
+Shows the effect of dimensionality reduction.
+
+---
+
+## Figures 7–8 — Automated Model Platforms
+
+These figures show results from H2O.ai and Lazy Predict.
+
+---
+
+## Figure 9 — ML Accuracy Across Scenarios
+
+Figure 9 compares the accuracy of ML models across Scenarios S1–S9.
+
+It demonstrates that preprocessing, balancing, feature selection, and tuning can substantially affect model performance.
+
+---
+
+## Figure 10 — DL Accuracy
+
+Figure 10 compares the DL models under Scenario S10.
+
+ANN achieves the highest individual DL accuracy of 97.7%.
+
+---
+
+## Figure 11 — Learning Curves
+
+Figure 11 shows training and cross-validation scores for the ML models.
+
+The authors observe that after approximately **2,500–3,000 training examples**, there is only a small change in performance.
+
+---
+
+## Figure 12 — Confusion Matrices
+
+Figure 12 presents confusion matrices for the proposed ML and DL models.
+
+The matrices allow the reader to examine how well the models distinguish:
+
+* Normal
+* Suspect
+* Pathological
+
+The paper notes that SVM, Extra Trees, LGBM, Voting, and Stacking models are able to classify nearly all target classes accurately.
+
+---
+
+# 35. Most Important Result
+
+The most important result to remember from Paper 3 is:
+
+> **The proposed Stacking Classifier achieved 98.9% accuracy, 99.0% precision, 98.6% recall, 99.3% F1-score, and 99.8% ROC-AUC.**
+
+The Stacking Classifier combines:
+
+```text
+SVM + Extra Trees + LGBM
+```
+
+The paper considers this the main proposed model.
+
+---
+
+# 36. Training and Prediction Time
+
+The paper also reports computational time for the Stacking Classifier.
+
+### Without hyperparameter tuning and Grid Search
+
+* Training time: **17.17 seconds**
+* Prediction time: **1.79 seconds**
+
+### With hyperparameter tuning and Grid Search
+
+* Training time: **36.06 seconds**
+* Prediction time: **1.75 seconds**
+
+This demonstrates that optimization increases training time but the reported prediction time remains low.
+
+---
+
+# 37. Comparison with Previous Studies
+
+The paper compares its result with previously published CTG studies.
+
+Some reported results include:
+
+| Study             | Model                   |  Accuracy |
+| ----------------- | ----------------------- | --------: |
+| Akbulut et al.    | Decision Forest         |     89.5% |
+| Uzun et al.       | PCA-14 ELM              |     84.3% |
+| Piri et al.       | RF/XGBoost              |       94% |
+| Vani              | DNN                     |       78% |
+| Abbas et al.      | bagFDA                  |    93.44% |
+| Fei et al.        | FCM-ANFIS               |    96.39% |
+| Fasihi et al.     | 1D CNN                  |    97.46% |
+| Li et al.         | Blender Model           |     95.9% |
+| Jebadurai et al.  | SVM/DT/KNN              |       92% |
+| Salini et al.     | RF                      |       93% |
+| **Proposed work** | **Stacking Classifier** | **98.9%** |
+
+The paper reports that its proposed stacking approach achieves higher performance than the listed previous studies.
+
+---
+
+# 38. Advantages of the Paper
+
+## 38.1 Extensive model comparison
+
+The authors evaluate many different ML and DL algorithms instead of relying on one model.
+
+---
+
+## 38.2 Uses ensemble learning
+
+The Stacking Classifier combines multiple models and achieves strong performance.
+
+---
+
+## 38.3 Addresses class imbalance
+
+SMOTE is used to generate synthetic minority samples.
+
+---
+
+## 38.4 Investigates preprocessing
+
+The authors systematically compare different preprocessing scenarios.
+
+---
+
+## 38.5 Feature selection
+
+The paper investigates several feature selection methods.
+
+---
+
+## 38.6 Hyperparameter tuning
+
+Grid Search is used to optimize model parameters.
+
+---
+
+## 38.7 Cross-validation
+
+Five-fold cross-validation is used in the optimized scenarios.
+
+---
+
+## 38.8 Multiple evaluation metrics
+
+The paper reports:
+
+* Accuracy
+* Precision
+* Recall
+* F1-score
+* ROC-AUC
+* Learning curves
+
+This provides a broader view of model performance.
+
+---
+
+# 39. Limitations / Points to Be Careful About
+
+The paper itself discusses future challenges rather than providing a large dedicated limitations section.
+
+Important limitations and practical considerations include:
+
+### 39.1 Dataset limitation
+
+The work is based on the UCI CTG dataset containing 2,126 records.
+
+Although the authors describe the dataset as useful for their study, larger and additional datasets would be valuable for evaluating generalizability.
+
+---
+
+### 39.2 External validation
+
+The paper proposes rigorous validation and uses five-fold cross-validation, but the reported experiments are still based on the UCI CTG dataset.
+
+The authors specifically mention using other available datasets in future work to test the framework further.
+
+---
+
+### 39.3 Real-time clinical deployment
+
+The proposed system is not presented as an already deployed clinical diagnostic system.
+
+The authors state that future work could integrate the model with CTG devices for real-time monitoring after obtaining the required approvals and declarations.
+
+---
+
+### 39.4 Computational scalability
+
+The paper notes that computational costs and scalability can become significant when deploying fetal health prediction on a large scale.
+
+---
+
+### 39.5 Explainability is proposed but not deeply demonstrated
+
+The introduction identifies explainable AI as an objective and mentions improving interpretability and trust.
+
+However, the main experimental sections presented in the paper focus heavily on:
+
+* preprocessing,
+* feature selection,
+* ML/DL models,
+* ensemble learning,
+* accuracy,
+* precision,
+* recall,
+* F1,
+* AUC.
+
+A detailed SHAP/LIME-style explanation experiment is not presented as a major result in the reported methodology.
+
+This distinction is important when discussing the paper in a viva.
+
+---
+
+# 40. Future Work
+
+The paper suggests several future directions.
+
+These include:
+
+* using additional datasets,
+* testing the framework on other CTG datasets,
+* implementing additional ML models,
+* implementing additional DL models,
+* improving performance,
+* developing real-time diagnosis applications,
+* integrating the model with CTG devices,
+* real-time fetal monitoring,
+* medical follow-up,
+* addressing computational costs and scalability,
+* obtaining required regulatory/clinical approvals.
+
+---
+
+# 41. Relationship to Our Project
+
+Our project title is:
+
+**“An Optimized Explainable Ensemble Learning Framework for AI-Assisted Early Fetal Health Risk Assessment Using Cardiotocography Data”**
+
+Paper 3 is highly relevant to our project because it combines several concepts that are directly related to our proposed system.
+
+The important connections are:
+
+| Paper 3                           | Our Project                            |
+| --------------------------------- | -------------------------------------- |
+| CTG-based fetal health prediction | CTG-based fetal health risk assessment |
+| UCI CTG dataset                   | CTG dataset                            |
+| 3-class classification            | Fetal health risk classification       |
+| SMOTE                             | Imbalance handling                     |
+| Feature selection                 | Feature optimization                   |
+| Hyperparameter tuning             | Model optimization                     |
+| Grid Search                       | Optimization                           |
+| Stacking Classifier               | Ensemble learning                      |
+| Multiple ML models                | Ensemble model construction            |
+| Cross-validation                  | Robust evaluation                      |
+| AI-assisted prediction            | AI-assisted clinical decision support  |
+
+Therefore, Paper 3 provides an important technical foundation for our project.
+
+---
+
+# 42. What Our Project Can Take From Paper 3
+
+Our project can take several important ideas from this paper.
+
+## 42.1 Ensemble learning
+
+Paper 3 demonstrates that combining models can produce stronger results than relying on one individual model.
+
+This supports our use of ensemble learning.
+
+---
+
+## 42.2 Stacking
+
+Paper 3 demonstrates the usefulness of a Stacking Classifier.
+
+The basic idea can be represented as:
+
+```text
+Model 1 ─┐
+Model 2 ─┼──> Meta Learner ──> Final Prediction
+Model 3 ─┘
+```
+
+This is highly relevant to our optimized ensemble framework.
+
+---
+
+## 42.3 SMOTE
+
+Paper 3 confirms the importance of addressing the imbalance in CTG data.
+
+This is directly relevant to our project because the Normal class is much larger than the Suspect and Pathological classes.
+
+---
+
+## 42.4 Feature selection
+
+Paper 3 demonstrates that removing irrelevant or redundant features can improve model performance.
+
+Our project can use this idea as part of optimization.
+
+---
+
+## 42.5 Hyperparameter optimization
+
+Paper 3 shows that Grid Search and hyperparameter tuning can improve the performance of individual models.
+
+This supports the optimization component of our project.
+
+---
+
+## 42.6 Cross-validation
+
+The paper demonstrates the importance of evaluating models using multiple folds rather than relying only on one train/test split.
+
+This is useful for our project evaluation.
+
+---
+
+# 43. What Our Project Adds Beyond Paper 3
+
+This is a very important point for the project review.
+
+Paper 3 already has:
+
+```text
+CTG
++
+SMOTE
++
+Feature Selection
++
+Hyperparameter Tuning
++
+Ensemble Learning
+```
+
+Therefore, we should NOT claim that our project is the first project to combine these ideas.
+
+Our project focuses on extending this direction, particularly through:
+
+```text
+Optimization
++
+Explainability
++
+Ensemble Learning
++
+Clinical Decision Support
+```
+
+The major additional emphasis in our project is **Explainable AI (XAI)**.
+
+The purpose of XAI is to answer:
+
+> Why did the model predict this fetal health risk?
+
+For example, instead of only displaying:
+
+```text
+Prediction: Pathological
+```
+
+an explainable system should also help indicate which CTG features contributed to that prediction.
+
+Possible explanation techniques can include:
+
+* SHAP
+* LIME
+* feature importance
+* local explanations
+* global feature analysis
+
+The exact XAI technique used in our final implementation should be described according to our actual implementation.
+
+---
+
+# 44. Important Difference: Paper 3 vs Base Paper
+
+Both papers use the UCI CTG dataset and address the same three fetal health classes.
+
+However, their focus is different.
+
+| Aspect                   | Base Paper                          | Paper 3                                                |
+| ------------------------ | ----------------------------------- | ------------------------------------------------------ |
+| Dataset                  | UCI CTG                             | UCI CTG                                                |
+| Records                  | 2,126                               | 2,126                                                  |
+| Classes                  | Normal/Suspect/Pathological         | Normal/Suspect/Pathological                            |
+| Main imbalance technique | SMOTE                               | SMOTE                                                  |
+| Main evaluation emphasis | Balanced Accuracy                   | Accuracy, Precision, Recall, F1, AUC                   |
+| ML models                | 8                                   | 7                                                      |
+| DL                       | DNN                                 | ANN, RNN, LSTM, MLP, TabNet                            |
+| Ensemble                 | Model comparison, LightGBM selected | Stacking/Voting                                        |
+| Feature processing       | Correlation-based analysis          | Multiple feature-selection methods + PCA               |
+| Hyperparameter tuning    | Less central                        | Major component                                        |
+| CV                       | 5-fold CV                           | 5-fold CV                                              |
+| Main reported model      | LightGBM                            | Stacking Classifier                                    |
+| Main reported metric     | 5-fold Balanced Accuracy = 91.34%   | Accuracy = 98.9%                                       |
+| XAI                      | Not central                         | Mentioned as an objective, but not deeply demonstrated |
+| Main focus               | Imbalance-aware evaluation          | Extensive optimization + ensemble comparison           |
+
+### Key distinction
+
+The Base Paper emphasizes:
+
+**class imbalance + SMOTE + balanced accuracy + comparison of ML/DNN models**
+
+Paper 3 emphasizes:
+
+**preprocessing + feature selection + hyperparameter tuning + ensemble learning + ML/DL comparison**
+
+This makes Paper 3 particularly useful for the **optimization and ensemble-learning aspects** of our project.
+
+---
+
+# 45. Paper 3 vs Supporting Paper 2
+
+Supporting Paper 2 is a broad review of AI applications in women's health.
+
+Paper 3 is a technical research paper specifically focused on fetal health prediction using CTG data.
+
+| Aspect                | Supporting Paper 2               | Paper 3                  |
+| --------------------- | -------------------------------- | ------------------------ |
+| Scope                 | Broad women's health             | Fetal health             |
+| Type                  | Narrative review                 | Research article         |
+| CTG focus             | One part of broader AI landscape | Central topic            |
+| Dataset               | Multiple studies/applications    | UCI CTG                  |
+| ML experiments        | Review of existing work          | Direct experiments       |
+| Ensemble learning     | Discussed in broader AI context  | Directly implemented     |
+| SMOTE                 | Discussed in relevant literature | Directly implemented     |
+| Hyperparameter tuning | Broad discussion                 | Directly implemented     |
+| Results               | Review of published systems      | New experimental results |
+| Project relevance     | Clinical/AI context              | Technical methodology    |
+
+Supporting Paper 2 helps establish the **broader importance of AI in women's healthcare**, while Paper 3 provides a **specific technical approach for CTG-based fetal health prediction**.
+
+---
+
+# 46. How Paper 3 Fits into Our Literature Review
+
+The three main technical ideas contributed by Paper 3 are:
+
+```text
+CTG Fetal Health Classification
+             ↓
+Data Preprocessing
+             ↓
+SMOTE
+             ↓
+Feature Selection
+             ↓
+Hyperparameter Optimization
+             ↓
+Ensemble Learning
+             ↓
+Stacking Classifier
+```
+
+This creates a strong foundation for our proposed project.
+
+Our project extends this direction toward:
+
+```text
+Optimized
++
+Explainable
++
+Ensemble
++
+AI-Assisted
++
+Fetal Health Risk Assessment
+```
+
+---
+
+# 47. Research Gap Identified From Paper 3
+
+Paper 3 achieves very high classification performance, but there are still opportunities for further work.
+
+The paper itself suggests:
+
+* additional datasets,
+* additional ML/DL models,
+* real-time deployment,
+* integration with CTG devices,
+* scalability improvements.
+
+From the perspective of our project, another important opportunity is **explainability**.
+
+High prediction performance alone does not completely answer:
+
+> Why did the model make this prediction?
+
+In healthcare applications, interpretability can help clinicians understand the model's reasoning.
+
+Therefore, our project can build upon the strong predictive approach of Paper 3 while emphasizing explainability.
+
+---
+
+# 48. Important Technical Concepts to Understand for Viva
+
+## What is Stacking?
+
+Stacking is an ensemble-learning technique where multiple base models generate predictions and another model, called a meta-model, learns how to combine those predictions.
+
+Example:
+
+```text
+SVM
+ ↓
+Extra Trees ──> Meta Classifier ──> Final Prediction
+ ↓
+LGBM
+```
+
+---
+
+## What is Voting?
+
+Voting combines the predictions of multiple models.
+
+In soft voting, predicted probabilities are combined.
+
+In hard voting, the majority class prediction is selected.
+
+---
+
+## What is SMOTE?
+
+SMOTE creates synthetic samples for minority classes to reduce class imbalance.
+
+---
+
+## What is Feature Selection?
+
+Feature selection chooses the most useful features and removes unnecessary or redundant ones.
+
+---
+
+## What is PCA?
+
+PCA converts the original features into a smaller number of principal components while attempting to preserve important information.
+
+---
+
+## What is Hyperparameter Tuning?
+
+Hyperparameter tuning searches for suitable model settings before training.
+
+---
+
+## What is Grid Search?
+
+Grid Search systematically tests predefined combinations of hyperparameter values and selects the configuration producing the desired evaluation performance.
+
+---
+
+## What is Five-Fold Cross-Validation?
+
+The dataset is divided into five parts.
+
+```text
+Round 1 → Fold 1 validation
+Round 2 → Fold 2 validation
+Round 3 → Fold 3 validation
+Round 4 → Fold 4 validation
+Round 5 → Fold 5 validation
+```
+
+Each fold is used once for evaluation.
+
+---
+
+# 49. Likely Panel Questions and Answers
+
+## Q1. What is the main objective of Paper 3?
+
+**Answer:**
+
+The main objective is to improve fetal health prediction from CTG data using AI by investigating multiple ML and DL models, preprocessing techniques, feature selection, SMOTE, hyperparameter tuning, cross-validation, and ensemble learning.
+
+---
+
+## Q2. Which dataset did they use?
+
+**Answer:**
+
+They used the UCI Cardiotocography dataset containing 2,126 CTG records, 21 features, and three fetal health classes: Normal, Suspect, and Pathological.
+
+---
+
+## Q3. Why is the dataset imbalanced?
+
+**Answer:**
+
+The Normal class contains 1,655 samples, while Suspect has 295 and Pathological has 176. Therefore, Normal represents about 77.8% of the dataset.
+
+---
+
+## Q4. How did they handle class imbalance?
+
+**Answer:**
+
+They used SMOTE, which generates synthetic samples for minority classes by interpolating between existing minority samples.
+
+---
+
+## Q5. What models were used?
+
+**Answer:**
+
+The paper evaluates seven main ML models: KNN, SVM, RF, Extra Trees, LGBM, Voting Classifier, and Stacking Classifier. It also evaluates five DL models: RNN, LSTM, MLP, TabNet, and ANN.
+
+---
+
+## Q6. Which model performed best?
+
+**Answer:**
+
+The proposed Stacking Classifier achieved the strongest reported ML performance with 98.9% accuracy, 99% precision, 98.6% recall, 99.3% F1-score, and 99.8% ROC-AUC.
+
+---
+
+## Q7. Which models were combined in the Stacking Classifier?
+
+**Answer:**
+
+The paper's main Stacking Classifier combines SVM, Extra Trees, and LGBM.
+
+---
+
+## Q8. Why use ensemble learning?
+
+**Answer:**
+
+Different models can capture different patterns in the data. Ensemble learning combines their predictions so that the final model can exploit their complementary strengths.
+
+---
+
+## Q9. What is the difference between Voting and Stacking?
+
+**Answer:**
+
+Voting combines predictions directly, usually through majority voting or probability averaging. Stacking uses the outputs of multiple base models as inputs to a meta-classifier, which learns how to combine them.
+
+---
+
+## Q10. What preprocessing techniques were used?
+
+**Answer:**
+
+The paper investigates outlier removal, standardization, normalization, SMOTE, feature selection, correlation filtering, PCA, and hyperparameter tuning.
+
+---
+
+## Q11. Why was feature selection performed?
+
+**Answer:**
+
+Feature selection reduces redundant or less informative features, which can reduce model complexity and potentially improve performance and generalization.
+
+---
+
+## Q12. Why was Grid Search used?
+
+**Answer:**
+
+Grid Search systematically evaluates different combinations of hyperparameters and identifies configurations that produce better model performance.
+
+---
+
+## Q13. What is the role of cross-validation?
+
+**Answer:**
+
+Five-fold cross-validation evaluates the model across multiple train-validation partitions. This provides a more robust estimate of generalization than relying on only one split.
+
+---
+
+## Q14. Which DL model performed best?
+
+**Answer:**
+
+The ANN achieved the highest individual DL performance with 97.7% accuracy, precision, recall, and F1-score.
+
+---
+
+## Q15. Did DL outperform the final ML model?
+
+**Answer:**
+
+No. The reported ANN accuracy was 97.7%, while the proposed ML Stacking Classifier achieved 98.9% accuracy.
+
+---
+
+## Q16. What is the main contribution of Paper 3 to our project?
+
+**Answer:**
+
+The paper provides strong technical support for using preprocessing, SMOTE, feature selection, hyperparameter optimization, and ensemble learning for CTG-based fetal health classification, particularly the use of a stacking ensemble.
+
+---
+
+## Q17. What is missing that our project focuses on?
+
+**Answer:**
+
+Our project places stronger emphasis on an optimized and explainable ensemble-learning framework. In particular, explainability is important because a clinical decision-support model should provide insight into why a prediction was generated.
+
+---
+
+## Q18. Is 98.9% accuracy enough to deploy the model clinically?
+
+**Answer:**
+
+No. High experimental performance does not by itself establish clinical readiness. External validation, testing on additional datasets, clinical evaluation, regulatory approval, workflow integration, and real-world monitoring would be required.
+
+---
+
+## Q19. Can this model replace doctors?
+
+**Answer:**
+
+No. The appropriate role is AI-assisted decision support. The model can provide predictions to support healthcare professionals, but clinical decisions should remain under qualified healthcare professionals.
+
+---
+
+## Q20. What is the biggest connection between Paper 3 and our project?
+
+**Answer:**
+
+Both focus on CTG-based fetal health prediction and use techniques such as SMOTE, feature processing, model optimization, and ensemble learning. Our project builds further toward an optimized and explainable ensemble framework.
+
+---
+
+# 50. One-Minute Explanation for the Panel
+
+If the panel asks:
+
+> "Explain Supporting Paper 3."
+
+You can say:
+
+> "Supporting Paper 3 is a 2025 research paper by Sara S. Ahmed and Nourelhoda M. Mahmoud published in Neural Computing and Applications. The paper focuses on early fetal health prediction using CTG data and the UCI Cardiotocography dataset. It contains 2,126 records, 21 features, and three classes: Normal, Suspect, and Pathological. Since the dataset is imbalanced, the authors use SMOTE. They also investigate outlier removal, normalization, standardization, feature selection, PCA, and Grid Search-based hyperparameter tuning. They compare seven machine learning models and five deep learning models and also investigate ensemble learning. The main proposed model is a Stacking Classifier combining SVM, Extra Trees, and LGBM. It achieves 98.9% accuracy, 99% precision, 98.6% recall, 99.3% F1-score, and 99.8% AUC. This paper is highly relevant to our project because it provides a strong foundation for optimization and ensemble learning on CTG data. Our project extends this direction by emphasizing an optimized and explainable ensemble framework."
+
+---
+
+# 51. Five Numbers You Must Remember
+
+For the viva, remember these numbers:
+
+```text
+Dataset        → 2,126 records
+Features       → 21
+Classes        → 3
+Best ML model  → Stacking Classifier
+Accuracy       → 98.9%
+```
+
+Also remember:
+
+```text
+Precision      → 99.0%
+Recall         → 98.6%
+F1-score       → 99.3%
+ROC-AUC        → 99.8%
+```
+
+---
+
+# 52. Five Concepts You Must Remember
+
+If you cannot remember the entire paper, remember these five concepts:
+
+### 1. SMOTE
+
+Used to handle class imbalance.
+
+### 2. Feature Selection
+
+Used to retain informative features and reduce redundancy.
+
+### 3. Hyperparameter Tuning
+
+Grid Search is used to optimize model settings.
+
+### 4. Ensemble Learning
+
+Multiple models are combined.
+
+### 5. Stacking
+
+SVM + Extra Trees + LGBM are combined through a meta-classifier.
+
+---
+
+# 53. Final Takeaway
+
+Paper 3 demonstrates that CTG-based fetal health prediction can benefit from a systematic combination of:
+
+```text
+Preprocessing
+      +
+SMOTE
+      +
+Feature Selection
+      +
+Dimensionality Reduction
+      +
+Hyperparameter Tuning
+      +
+Ensemble Learning
+      +
+Cross-Validation
+```
+
+The resulting Stacking Classifier achieves:
+
+**98.9% Accuracy**
+
+with:
+
+**99.0% Precision**
+
+**98.6% Recall**
+
+**99.3% F1-score**
+
+**99.8% ROC-AUC**
+
+The most important contribution for our project is the demonstration that **optimized ensemble learning can improve CTG-based fetal health classification**.
+
+Our project builds on this direction by combining optimization and ensemble learning with a stronger emphasis on **Explainable AI**, so that the system is not limited to producing a fetal health prediction but can also provide understandable information about the factors contributing to that prediction.
+
+---
+
+# 54. Reference
+
+Ahmed, S. S., & Mahmoud, N. M. (2025). Early detection of fetal health status based on cardiotocography using artificial intelligence. *Neural Computing and Applications, 37*, 16753–16779. DOI: 10.1007/s00521-025-11343-x.
+
+```
+
+### One important point for your project
+
+Paper 3 is **very important for your literature review** because it is much closer to your final project idea than a general healthcare-AI paper. In particular, its combination of **SMOTE + feature selection + hyperparameter tuning + stacking ensemble** directly supports the **“Optimized Ensemble Learning”** part of your project. The paper's methodology and results are documented across its architecture (Fig. 1), scenario design (Section 3.8), ML results (Table 3), DL results (Table 4), meta-classifier results (Table 5), and final comparison (Table 6). :contentReference[oaicite:1]{index=1}
+
+```
