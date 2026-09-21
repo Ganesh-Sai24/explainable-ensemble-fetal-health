@@ -1,0 +1,1869 @@
+
+
+---
+
+# Base Paper Analysis
+
+## Early Detection of Fetal Health Conditions Using Machine Learning for Classifying Imbalanced Cardiotocographic Data
+
+**Authors:** Irem Nazli, Ertugrul Korbeko, Seyma Dogru, Emin Kugu, Ozgur Koray Sahingoz
+**Journal:** Diagnostics
+**Year:** 2025
+**Volume:** 15
+**Article:** 1250
+**DOI:** 10.3390/diagnostics15101250
+
+---
+
+## 1. Why This Paper Was Selected as Our Base Paper
+
+Our project focuses on early fetal health risk assessment using cardiotocography (CTG) data. Therefore, a paper that directly studies fetal health classification using CTG data provides a suitable technical foundation for our work.
+
+The selected base paper investigates the classification of fetal health conditions using machine learning while specifically addressing the problem of **class imbalance** in the CTG dataset.
+
+The paper is particularly relevant to our project because it provides:
+
+* the CTG dataset used in our research direction,
+* the three fetal health classes,
+* data preprocessing procedures,
+* feature analysis,
+* class-imbalance handling using SMOTE,
+* multiple machine learning algorithms,
+* cross-validation,
+* balanced accuracy as an important evaluation metric,
+* a comparison between traditional machine learning and deep learning,
+* and a practical user-interface-oriented implementation.
+
+Our project builds on this foundation rather than starting the problem from the beginning. 
+
+---
+
+# 2. Problem Addressed by the Base Paper
+
+The base paper addresses the problem of **automatically classifying fetal health conditions from cardiotocographic data**.
+
+Cardiotocography records important fetal and maternal parameters, particularly:
+
+* **Fetal Heart Rate (FHR)**
+* **Uterine Contractions (UC)**
+
+Traditionally, CTG recordings are interpreted manually by clinicians. The paper identifies several practical issues with this process:
+
+* manual interpretation is time-consuming,
+* interpretation depends heavily on clinical expertise,
+* small but important patterns may be difficult to recognize,
+* interpretation can vary between clinicians,
+* and human fatigue or subjectivity may affect the assessment.
+
+The paper therefore investigates machine learning as a **decision-support approach** that can automatically classify fetal health conditions from CTG-derived features. 
+
+---
+
+# 3. Clinical Background: What is CTG?
+
+**Cardiotocography (CTG)** is a fetal monitoring technique that records information about the fetal heart rate and uterine contractions.
+
+The base paper explains that CTG has been used in obstetrics for many years to monitor fetal well-being.
+
+Two important components are:
+
+### Fetal Heart Rate (FHR)
+
+FHR represents the fetal heartbeat measured in beats per minute.
+
+The paper states that the normal fetal heart-rate range is approximately:
+
+**110–160 beats per minute**
+
+It also discusses:
+
+* Bradycardia: baseline heart rate below 110 bpm for approximately 10 minutes.
+* Tachycardia: baseline heart rate above 160 bpm for approximately 10 minutes.
+* Typical heart-rate variability: approximately 6–25 bpm.
+
+### Uterine Contractions (UC)
+
+Uterine contractions provide additional information about fetal well-being, particularly during labor.
+
+The combination of FHR and UC information forms an important basis for CTG-based fetal assessment. 
+
+---
+
+# 4. Dataset Used in the Base Paper
+
+The paper uses the **UCI Cardiotocography (CTG) dataset**, obtained through the CTG dataset available on Kaggle.
+
+The dataset contains:
+
+* **2126 records**
+* **21 input attributes**
+* **3 fetal health classes**
+
+The records represent pregnant women in their third trimester.
+
+The CTGs were classified by **three specialist obstetricians**, and a consensus classification was assigned. The paper treats these expert classifications as the gold-standard labels. 
+
+---
+
+# 5. Target Classes
+
+The fetal health classification contains three classes:
+
+| Class Code | Class        | Meaning                                           |
+| ---------- | ------------ | ------------------------------------------------- |
+| 0          | Normal       | Normal fetal condition                            |
+| 1          | Suspect      | Fetal condition requiring attention/investigation |
+| 2          | Pathological | Abnormal/pathological fetal condition             |
+
+The dataset is strongly imbalanced.
+
+### Class distribution
+
+| Class        |  Records | Percentage |
+| ------------ | -------: | ---------: |
+| Normal       |     1655 |      77.8% |
+| Suspect      |      295 |      13.9% |
+| Pathological |      176 |       8.3% |
+| **Total**    | **2126** |   **100%** |
+
+This imbalance is one of the central problems addressed by the base paper.
+
+The Normal class represents the large majority of observations, while Suspect and Pathological cases are minority classes. 
+
+---
+
+# 6. Why Class Imbalance Is a Major Problem
+
+Suppose a dataset contains mostly Normal cases.
+
+A model could achieve a high conventional accuracy simply by predicting Normal for a large proportion of cases.
+
+However, this does not necessarily mean that the model is good at detecting:
+
+* Suspect cases
+* Pathological cases
+
+This is particularly important in a healthcare application because minority cases may represent the situations that require greater attention.
+
+The base paper therefore argues that **ordinary accuracy alone is not sufficient** for evaluating an imbalanced fetal-health classification problem.
+
+This leads to one of the most important methodological decisions in the paper:
+
+> Give greater importance to **balanced accuracy** rather than relying only on standard accuracy.
+
+
+
+---
+
+# 7. Features Used in the Dataset
+
+The dataset contains 21 CTG-related attributes.
+
+The main features include:
+
+| Feature | Description                                             |
+| ------- | ------------------------------------------------------- |
+| LB      | Fetal heart beats per minute                            |
+| AC      | Accelerations per second                                |
+| FM      | Fetal movements per second                              |
+| UC      | Uterine contractions per second                         |
+| LD      | Light decelerations per second                          |
+| SD      | Severe decelerations per second                         |
+| PD      | Prolonged decelerations per second                      |
+| ASTV    | Percentage of time with abnormal short-term variability |
+| MSTV    | Mean short-term variability                             |
+| ALTV    | Percentage of time with abnormal long-term variability  |
+| MLTV    | Mean long-term variability                              |
+| HW      | Width of FHR histogram                                  |
+| HM      | Maximum of FHR histogram                                |
+| HMin    | Minimum of FHR histogram                                |
+| NP      | Histogram peaks                                         |
+| NZ      | Histogram zeroes                                        |
+| HMo     | Histogram mode                                          |
+| HMe     | Histogram mean                                          |
+| HMed    | Histogram median                                        |
+| HV      | Histogram variance                                      |
+| HT      | Histogram tendency                                      |
+
+The target variable is **NSP**, representing:
+
+* 0 → Normal
+* 1 → Suspect
+* 2 → Pathological
+
+
+
+---
+
+# 8. Data Preprocessing in the Base Paper
+
+The base paper follows several preprocessing steps.
+
+### Step 1 — Dataset inspection
+
+The dataset was examined for missing values.
+
+The paper reports that:
+
+> No missing values were found.
+
+Therefore, missing-value imputation was not required.
+
+### Step 2 — Class-distribution analysis
+
+The researchers analyzed the distribution of the three fetal health classes and identified significant class imbalance.
+
+### Step 3 — Correlation analysis
+
+A correlation matrix was generated to identify relationships between features.
+
+The researchers observed strong correlation involving the **Histogram Mean** feature.
+
+### Step 4 — Feature removal
+
+The **Histogram Mean** feature was removed because of its high correlation with other features and concerns regarding redundancy/multicollinearity.
+
+### Step 5 — Train/test division
+
+The dataset was divided into:
+
+* **80% training**
+* **20% testing**
+
+The test data was intended for evaluation on unseen samples. 
+
+---
+
+# 9. Feature Importance Analysis
+
+The paper does not use feature importance primarily to aggressively reduce the feature set.
+
+Instead, it uses feature importance to understand which variables contribute strongly to the predictions.
+
+The authors use **Random Forest feature importance**.
+
+The important features highlighted in the paper include:
+
+1. Percentage of time with abnormal long-term variability
+2. Percentage of time with abnormal short-term variability
+3. Histogram Mean
+
+There is an important detail here:
+
+**Histogram Mean was identified as important but was subsequently removed because of its high correlation with other features.**
+
+This demonstrates that feature importance and feature selection are not necessarily the same thing.
+
+Feature importance answers:
+
+> "Which features contribute strongly to the model?"
+
+Feature selection answers:
+
+> "Which features should we retain for modelling?"
+
+The base paper mainly uses the first concept for interpretability and understanding. 
+
+---
+
+# 10. Machine Learning Methodology
+
+The paper compares multiple machine learning approaches rather than relying on a single classifier.
+
+The models evaluated in the main experimental results are:
+
+* Decision Tree
+* Random Forest
+* K-Nearest Neighbors
+* ExtraTrees
+* Support Vector Machine
+* Gradient Boosting
+* LightGBM
+* CatBoost
+
+A Deep Neural Network is additionally evaluated as the deep-learning model.
+
+The paper's algorithm discussion also describes ANN, but the main experimental results in Section 4 report **8 ML models + 1 DNN**. This distinction is useful when describing the exact experiments conducted. 
+
+---
+
+# 11. Why Multiple Machine Learning Algorithms Were Compared
+
+Different algorithms learn patterns in different ways.
+
+For example:
+
+### Decision Tree
+
+Uses a sequence of decision rules to divide observations into different classes.
+
+### Random Forest
+
+Combines multiple decision trees and aggregates their predictions.
+
+### KNN
+
+Classifies a sample according to the classes of nearby training observations.
+
+### SVM
+
+Attempts to find a decision boundary that separates classes with an appropriate margin.
+
+### Gradient Boosting
+
+Builds a sequence of decision trees where each new model attempts to improve the errors of previous models.
+
+### ExtraTrees
+
+Uses an ensemble of randomized decision trees.
+
+### CatBoost
+
+Uses gradient-boosted decision trees with techniques designed to improve boosting performance.
+
+### LightGBM
+
+A gradient-boosting framework based on decision trees, designed for efficient and high-performance learning.
+
+The purpose of testing several algorithms is to determine which modelling approach performs most effectively on the CTG dataset. 
+
+---
+
+# 12. The Role of LightGBM
+
+One of the most important outcomes of the base paper is the performance of **LightGBM**.
+
+LightGBM is a tree-based gradient boosting algorithm.
+
+The paper found that LightGBM achieved the highest balanced accuracy among the evaluated traditional ML models.
+
+Its reported 5-fold cross-validation result was:
+
+**Balanced Accuracy = 91.34%**
+
+The paper therefore selected LightGBM for the user interface developed as part of the study. 
+
+---
+
+# 13. SMOTE — Handling Class Imbalance
+
+One of the strongest methodological contributions of the base paper is the use of:
+
+**SMOTE — Synthetic Minority Oversampling Technique**
+
+SMOTE is used to increase the representation of minority classes.
+
+Instead of simply copying existing minority samples, SMOTE generates synthetic samples using existing minority observations and their nearest minority-class neighbors.
+
+Conceptually:
+
+```text
+Minority sample A
+        +
+Nearest minority sample B
+        ↓
+Interpolation
+        ↓
+Synthetic minority sample
+```
+
+This allows the training data to contain more representative minority-class samples.
+
+---
+
+# 14. Why the Paper Chose SMOTE
+
+The authors discuss several possible imbalance-handling methods.
+
+### Random Oversampling
+
+Duplicates minority observations.
+
+The paper preferred SMOTE because duplication can increase the risk of overfitting.
+
+### Undersampling
+
+Removes some majority-class observations.
+
+The paper avoided relying on undersampling because it can discard potentially useful majority-class information.
+
+### Class Weighting
+
+Assigns greater importance to minority-class errors.
+
+The paper reports that preliminary experiments did not produce consistent performance improvements across the models.
+
+### SMOTE
+
+The paper therefore selected SMOTE because it:
+
+* generates synthetic minority samples,
+* avoids simply duplicating minority records,
+* preserves majority-class information,
+* and improved balanced performance across the evaluated models.
+
+
+
+---
+
+# 15. Very Important: Where SMOTE Is Applied
+
+This is an important point for our project.
+
+SMOTE should be applied to the **training data**, not the untouched test data.
+
+The base paper explicitly describes applying SMOTE to the training portion.
+
+The idea is:
+
+```text
+Original Dataset
+       ↓
+Train / Test split
+       ↓
+Training Data
+       ↓
+SMOTE
+       ↓
+Balanced Training Data
+       ↓
+Model Training
+       ↓
+Original Test Data
+       ↓
+Evaluation
+```
+
+The reason is to avoid allowing synthetic information derived from the evaluation data to influence model training.
+
+This is an important concept for preventing evaluation contamination/data leakage.
+
+---
+
+# 16. Cross-Validation Methodology
+
+The base paper also evaluates the models using **5-fold cross-validation**.
+
+The dataset is divided into five folds:
+
+```text
+Fold 1
+Fold 2
+Fold 3
+Fold 4
+Fold 5
+```
+
+Then:
+
+```text
+Round 1 → Fold 1 = Test
+          Folds 2–5 = Train
+
+Round 2 → Fold 2 = Test
+          Folds 1,3,4,5 = Train
+
+Round 3 → Fold 3 = Test
+
+Round 4 → Fold 4 = Test
+
+Round 5 → Fold 5 = Test
+```
+
+Every fold gets an opportunity to act as the evaluation fold.
+
+This provides a more robust estimate of model performance than depending on a single random train/test split.
+
+The paper reports that cross-validation produced particularly meaningful improvements in balanced accuracy. 
+
+---
+
+# 17. SMOTE and Cross-Validation Are Different Things
+
+This distinction is important for our project.
+
+### SMOTE answers:
+
+> How do we address class imbalance?
+
+### Cross-validation answers:
+
+> How do we evaluate model performance more reliably?
+
+Therefore:
+
+```text
+SMOTE = Data balancing technique
+
+5-Fold CV = Model evaluation strategy
+```
+
+They solve different problems but can be used together.
+
+The base paper combines these ideas in its proposed workflow. 
+
+---
+
+# 18. Base Paper Workflow
+
+The overall workflow can be represented as:
+
+```text
+                CTG Dataset
+                     │
+                     ↓
+             Data Examination
+                     │
+                     ↓
+            Missing Value Check
+                     │
+                     ↓
+          Correlation Analysis
+                     │
+                     ↓
+       Remove Redundant Feature
+          (Histogram Mean)
+                     │
+                     ↓
+             Dataset Splitting
+                     │
+                     ↓
+          ┌──────────┴──────────┐
+          │                     │
+          ↓                     ↓
+       Training              Testing
+          │                     │
+          ↓                     │
+        SMOTE                  │
+          │                     │
+          ↓                     │
+ Balanced Training Data         │
+          │                     │
+          ↓                     │
+   Train ML Models              │
+          │                     │
+          ├─────────────────────┘
+          ↓
+       Prediction
+          │
+          ↓
+      Evaluation
+          │
+          ↓
+ Accuracy / Recall /
+ Balanced Accuracy /
+ Balanced Error Rate
+          │
+          ↓
+      Model Comparison
+          │
+          ↓
+       LightGBM
+          │
+          ↓
+      User Interface
+```
+
+The paper additionally uses 5-fold cross-validation as a more robust evaluation strategy. 
+
+---
+
+# 19. Evaluation Metrics
+
+The paper considers multiple evaluation metrics.
+
+## Accuracy
+
+```text
+Accuracy =
+Correct Predictions / Total Predictions
+```
+
+Accuracy tells us how many predictions are correct overall.
+
+However, because the dataset is highly imbalanced, accuracy alone can be misleading.
+
+---
+
+## Recall
+
+For a particular class:
+
+```text
+Recall = TP / (TP + FN)
+```
+
+It measures how many actual instances of that class were correctly identified.
+
+---
+
+## Balanced Accuracy
+
+The paper defines balanced accuracy as the macro-average of recall across the three classes:
+
+```text
+Balanced Accuracy =
+(Recall_Normal + Recall_Suspect + Recall_Pathological) / 3
+```
+
+This gives equal importance to all three classes.
+
+That is why it is particularly appropriate for this problem.
+
+---
+
+## Balanced Error Rate
+
+The paper defines:
+
+```text
+Balanced Error Rate =
+1 − Balanced Accuracy
+```
+
+Therefore, if balanced accuracy increases, balanced error rate decreases.
+
+---
+
+# 20. Why Balanced Accuracy Is Important for Our Project
+
+This is one of the most important ideas we take from the base paper.
+
+Our dataset contains:
+
+```text
+Normal       → 77.8%
+Suspect      → 13.9%
+Pathological → 8.3%
+```
+
+Therefore, a model could perform well on the majority Normal class while performing poorly on the minority classes.
+
+Balanced accuracy forces us to consider the recall of all classes equally.
+
+For our project, this is particularly relevant because the goal is not simply:
+
+> "How many predictions are correct?"
+
+It is also:
+
+> "How well can the system recognize each fetal health category?"
+
+---
+
+# 21. Experimental Results of the Base Paper
+
+The base paper compares the models using both:
+
+* 80/20 train-test division
+* 5-fold cross-validation
+
+The main results are:
+
+| Model             | 80/20 Accuracy | 80/20 Balanced Accuracy | 5-Fold Accuracy | 5-Fold Balanced Accuracy |
+| ----------------- | -------------: | ----------------------: | --------------: | -----------------------: |
+| CatBoost          |         95.25% |                  89.67% |          94.97% |                   91.00% |
+| Decision Tree     |         90.55% |                  79.68% |          88.33% |                   84.13% |
+| ExtraTrees        |         93.04% |                  83.91% |          93.74% |                   87.88% |
+| Gradient Boosting |         94.64% |                  89.42% |          93.84% |                   91.04% |
+| KNN               |         89.46% |                  76.76% |          86.36% |                   83.32% |
+| **LightGBM**      |     **95.67%** |              **90.93%** |      **95.16%** |               **91.34%** |
+| Random Forest     |         94.31% |                  87.14% |          93.70% |                   89.19% |
+| SVM               |         87.86% |                  74.48% |          83.40% |                   82.01% |
+
+The paper reports LightGBM as the strongest model based on balanced accuracy, reaching **91.34% under 5-fold cross-validation**. 
+
+---
+
+# 22. Important Accuracy Clarification
+
+There are two different numbers that should not be confused.
+
+### Highest standard accuracy
+
+For the 80/20 train-test experiment:
+
+**LightGBM = 95.67% accuracy**
+
+### Key balanced-accuracy result
+
+Under 5-fold cross-validation:
+
+**LightGBM = 91.34% balanced accuracy**
+
+Therefore, when discussing the paper in our project presentation, we should say exactly which metric we are referring to.
+
+We should **not call 91.34% "accuracy"** without specifying that it is balanced accuracy.
+
+---
+
+# 23. Effect of SMOTE
+
+The paper compares model performance before and after SMOTE.
+
+| Model             | Balanced Accuracy Before SMOTE | Balanced Accuracy After SMOTE |
+| ----------------- | -----------------------------: | ----------------------------: |
+| CatBoost          |                         89.67% |                        91.00% |
+| Decision Tree     |                         79.68% |                        84.13% |
+| ExtraTrees        |                         83.91% |                        87.88% |
+| Gradient Boosting |                         89.42% |                        91.04% |
+| KNN               |                         76.76% |                        83.32% |
+| LightGBM          |                         90.93% |                        91.34% |
+| Random Forest     |                         87.14% |                        89.19% |
+| SVM               |                         74.48% |                        82.01% |
+
+The paper reports an average balanced-error-rate reduction of **19.13%** after applying SMOTE.
+
+The largest reported reduction was for SVM at **29.50%**, followed by KNN at **28.23%**.
+
+Importantly, this does **not** mean SVM became the best overall model. It means SVM experienced the largest reported reduction in balanced error rate. LightGBM still had the strongest absolute balanced accuracy after SMOTE among the compared models. 
+
+---
+
+# 24. Deep Learning Component
+
+The paper also investigates a **Deep Neural Network (DNN)**.
+
+The purpose is to determine whether a deep learning model can capture complex relationships in the CTG data and outperform traditional machine learning approaches.
+
+The DNN architecture reported in the paper is:
+
+| Parameter           | Value       |
+| ------------------- | ----------- |
+| First hidden layer  | 128 neurons |
+| Second hidden layer | 64 neurons  |
+| Epochs              | 50          |
+| Batch size          | 32          |
+| Learning rate       | 0.0005      |
+| First activation    | Tanh        |
+| Second activation   | Sigmoid     |
+| Output activation   | Softmax     |
+
+The output layer uses Softmax because the problem contains three mutually exclusive fetal-health classes. 
+
+---
+
+# 25. DNN Results
+
+The DNN results reported by the paper include:
+
+| Dataset             | Accuracy | Balanced Accuracy |
+| ------------------- | -------: | ----------------: |
+| Training — 80/20    |   96.62% |            94.06% |
+| Validation — 80/20  |   89.41% |            76.06% |
+| Test — 80/20        |   91.08% |            81.07% |
+| Training — 5-Fold   |   95.84% |            92.19% |
+| Validation — 5-Fold |   91.76% |            86.24% |
+| Test — 5-Fold       |   91.08% |            85.06% |
+
+The paper concludes that, for this limited-size medical dataset, the DNN did not outperform the traditional machine-learning approaches.
+
+The authors suggest that deep learning may become more advantageous with larger and more diverse datasets. 
+
+---
+
+# 26. Overfitting Observation in the DNN
+
+The DNN training graph shows an important pattern.
+
+Training accuracy continues increasing, while validation accuracy fluctuates.
+
+The paper observes a noticeable gap between training and validation performance after approximately the 10th epoch, which it interprets as a possible sign of overfitting.
+
+This is another reason why simply increasing model complexity does not automatically produce a better model.
+
+---
+
+# 27. Technologies Used in the Base Paper
+
+The paper uses Python-based machine-learning tools.
+
+| Technology       | Purpose                                    |
+| ---------------- | ------------------------------------------ |
+| Python           | Main implementation environment            |
+| Pandas           | Data loading and dataframe manipulation    |
+| NumPy            | Numerical calculations and data processing |
+| Scikit-learn     | ML models, training and evaluation         |
+| Imbalanced-learn | SMOTE implementation                       |
+
+A user interface was subsequently developed using the selected LightGBM model. 
+
+---
+
+# 28. What the Base Paper Successfully Establishes
+
+The base paper establishes several important foundations for our project.
+
+### 1. CTG data can be used for fetal-health classification.
+
+### 2. The UCI CTG dataset is suitable for this type of research.
+
+### 3. The dataset is significantly imbalanced.
+
+### 4. Standard accuracy alone is not sufficient.
+
+### 5. SMOTE can improve minority-class representation.
+
+### 6. Balanced accuracy is an important evaluation metric.
+
+### 7. Multiple ML algorithms should be compared rather than assuming one model is optimal.
+
+### 8. LightGBM performs strongly on this dataset.
+
+### 9. Traditional ML can outperform the investigated DNN on this relatively small dataset.
+
+### 10. A machine-learning model can be integrated into a user-facing decision-support interface.
+
+These findings form the methodological starting point for our project. 
+
+---
+
+# 29. Limitations We Identified From the Base Paper
+
+The following points are important because they help explain why our project is not simply a reproduction of the base paper.
+
+## 29.1 The framework primarily compares individual models
+
+The base paper evaluates several different classifiers and identifies LightGBM as the strongest model.
+
+However, the final system is centered around the selected LightGBM model rather than a dedicated optimized ensemble framework combining complementary models.
+
+This provides an opportunity for our project to investigate whether combining complementary learners can provide a more robust classification framework.
+
+---
+
+# 30. Limited Optimization Perspective
+
+The base paper states that the models were implemented and fine-tuned, but the main contribution is the **comparison of multiple algorithms, SMOTE, and cross-validation**.
+
+Our project specifically emphasizes the **optimization of the learning framework**.
+
+The purpose of optimization in our project is not simply to increase a single accuracy number.
+
+It is intended to systematically improve aspects such as:
+
+* model configuration,
+* predictive performance,
+* minority-class recognition,
+* robustness,
+* and the overall classification pipeline.
+
+The exact optimization algorithm and hyperparameter-search strategy used in our implementation should be documented based on the actual implementation rather than being attributed to the base paper.
+
+---
+
+# 31. Explainability Gap
+
+The base paper does perform feature-importance analysis using Random Forest.
+
+This provides information about which features are important.
+
+However, this is different from a complete **Explainable AI (XAI) framework**.
+
+For example, feature importance generally answers:
+
+> "Which features are important overall?"
+
+A modern XAI framework can additionally investigate:
+
+> "Why did this particular patient/CTG record receive this particular prediction?"
+
+This distinction is important for our project.
+
+Our proposed project therefore emphasizes **explainability at the prediction level as well as feature-level understanding**, depending on the XAI techniques implemented.
+
+---
+
+# 32. Ensemble Learning Gap
+
+The literature review within the base paper itself contains studies involving ensemble learning.
+
+However, the base paper's final proposed system focuses on comparing individual classifiers and selecting LightGBM.
+
+Our project places **ensemble learning** at the center of the proposed framework.
+
+The idea is that different models may capture different aspects of the CTG feature space.
+
+Instead of depending completely on one classifier:
+
+```text
+CTG Features
+     │
+     ├── Model 1
+     ├── Model 2
+     ├── Model 3
+     └── Model 4
+          │
+          ↓
+    Ensemble Strategy
+          │
+          ↓
+ Final Fetal Health Risk
+```
+
+The exact models and ensemble mechanism should be determined by our implemented methodology.
+
+---
+
+# 33. Explainability + Ensemble + Optimization
+
+The major conceptual extension of our project is the combination of:
+
+```text
+CTG Data
+   ↓
+Preprocessing
+   ↓
+Class Imbalance Handling
+   ↓
+Feature Analysis
+   ↓
+Optimized Models
+   ↓
+Ensemble Learning
+   ↓
+Prediction
+   ↓
+Explainable AI
+   ↓
+Fetal Health Risk Assessment
+```
+
+This gives our project a broader focus than simply identifying the best single classifier.
+
+---
+
+# 34. Our Project
+
+## Project Title
+
+**An Optimized Explainable Ensemble Learning Framework for AI-Assisted Early Fetal Health Risk Assessment Using Cardiotocography Data**
+
+Our project uses the base paper as the methodological foundation and extends it toward an **optimized, ensemble-based, explainable fetal health risk assessment framework**.
+
+The project is intended as an **AI-assisted decision-support system**, not as a replacement for clinical judgment.
+
+---
+
+# 35. How Our Project Is Related to the Base Paper
+
+The relationship can be summarized as:
+
+```text
+BASE PAPER
+     │
+     ├── CTG Dataset
+     ├── Fetal Health Classification
+     ├── Data Preprocessing
+     ├── SMOTE
+     ├── Multiple ML Models
+     ├── 5-Fold Cross Validation
+     ├── Balanced Accuracy
+     ├── Feature Importance
+     └── LightGBM-based Interface
+             │
+             ↓
+       OUR PROJECT
+             │
+             ├── Same problem domain
+             ├── Same CTG foundation
+             ├── Same three-class concept
+             ├── Imbalance-aware learning
+             ├── Optimization
+             ├── Ensemble learning
+             ├── Explainable AI
+             └── Risk-oriented decision support
+```
+
+Therefore, our project is an **extension of the research direction established by the base paper**, rather than an unrelated system.
+
+---
+
+# 36. What Methodology We Take From the Base Paper
+
+The base paper provides the following methodological foundation for our project.
+
+### Data
+
+We use the CTG-based fetal-health classification problem.
+
+### Features
+
+We work with CTG-derived numerical features such as:
+
+* baseline heart rate,
+* accelerations,
+* fetal movements,
+* uterine contractions,
+* decelerations,
+* short-term variability,
+* long-term variability,
+* histogram characteristics.
+
+### Preprocessing
+
+We follow the idea of:
+
+* checking missing values,
+* analysing feature relationships,
+* identifying redundant information,
+* and preparing the data for model training.
+
+### Imbalance handling
+
+We adopt **SMOTE** as a major component of the imbalance-handling strategy.
+
+### Evaluation
+
+We retain the importance of:
+
+* accuracy,
+* recall,
+* balanced accuracy,
+* balanced error rate,
+* and cross-validation.
+
+### Model development
+
+We retain the idea of comparing different machine-learning approaches rather than assuming a particular algorithm will always be best.
+
+These components form the foundation upon which our proposed improvements are built. 
+
+---
+
+# 37. What We Add Beyond the Base Paper
+
+Our proposed project focuses on four major extensions.
+
+## 37.1 Optimization
+
+We aim to systematically optimize the model/framework configuration rather than relying only on conventional model settings.
+
+This can include optimization of model hyperparameters and other relevant configuration choices.
+
+---
+
+## 37.2 Ensemble Learning
+
+Instead of depending exclusively on a single final classifier, our framework investigates combining multiple complementary models.
+
+The purpose is to exploit different learning behaviours of different classifiers.
+
+---
+
+## 37.3 Explainable AI
+
+Our project emphasizes explaining model predictions.
+
+The system should not only provide:
+
+```text
+Prediction → Pathological
+```
+
+but should also provide meaningful information about the factors contributing to that prediction.
+
+This is particularly important in healthcare-oriented AI because users need to understand the basis of an automated prediction.
+
+---
+
+## 37.4 Risk Assessment
+
+The project title uses the term **risk assessment** because the system is intended to provide an AI-assisted assessment of fetal health status based on CTG-derived information.
+
+The output remains a decision-support result rather than a clinical diagnosis.
+
+---
+
+# 38. Our Proposed End-to-End Workflow
+
+The overall architecture of our project can be represented as:
+
+```text
+                 CTG Dataset
+                     │
+                     ↓
+              Data Acquisition
+                     │
+                     ↓
+            Data Quality Checking
+                     │
+                     ↓
+             Preprocessing
+                     │
+                     ↓
+          Feature Correlation Analysis
+                     │
+                     ↓
+          Feature Importance Analysis
+                     │
+                     ↓
+          Class Imbalance Detection
+                     │
+                     ↓
+                  SMOTE
+                     │
+                     ↓
+           Balanced Training Data
+                     │
+                     ↓
+          Candidate ML Algorithms
+                     │
+                     ↓
+              Optimization
+                     │
+                     ↓
+        Optimized Individual Models
+                     │
+                     ↓
+             Ensemble Learning
+                     │
+                     ↓
+              Final Prediction
+                     │
+                     ↓
+              Explainable AI
+                     │
+          ┌──────────┴───────────┐
+          ↓                      ↓
+   Feature Contribution     Prediction Reason
+          │                      │
+          └──────────┬───────────┘
+                     ↓
+         Fetal Health Risk Assessment
+                     │
+                     ↓
+               User Interface
+```
+
+This is the conceptual architecture of our project. The exact algorithms used at the optimization, ensemble and XAI stages should match the implementation we finally build.
+
+---
+
+# 39. Technical Skills Used in Our Project
+
+Our project involves several areas of technical knowledge.
+
+## Programming
+
+### Python
+
+Used for:
+
+* data processing,
+* model development,
+* training,
+* evaluation,
+* visualization,
+* and implementation of the ML pipeline.
+
+---
+
+## Data Processing
+
+### Pandas
+
+Used for:
+
+* loading the dataset,
+* manipulating dataframes,
+* examining features,
+* preprocessing,
+* and preparing data for machine learning.
+
+### NumPy
+
+Used for:
+
+* numerical operations,
+* arrays,
+* mathematical calculations,
+* and data processing.
+
+---
+
+# 40. Machine Learning
+
+We need to understand concepts such as:
+
+* supervised learning,
+* multiclass classification,
+* decision trees,
+* ensemble learning,
+* boosting,
+* bagging,
+* distance-based classification,
+* support vector machines,
+* hyperparameter tuning,
+* model validation,
+* and model comparison.
+
+---
+
+# 41. Imbalanced Learning
+
+An important technical skill is understanding:
+
+### SMOTE
+
+We need to understand:
+
+* minority classes,
+* nearest neighbors,
+* synthetic sample generation,
+* oversampling,
+* training-only application,
+* and data leakage prevention.
+
+---
+
+# 42. Model Optimization
+
+Our project requires understanding:
+
+* hyperparameters,
+* search spaces,
+* objective functions,
+* cross-validation,
+* parameter tuning,
+* optimization strategies,
+* and computational trade-offs.
+
+The purpose is to identify model configurations that provide strong and stable performance rather than relying only on default parameters.
+
+---
+
+# 43. Ensemble Learning
+
+We need to understand the difference between:
+
+### Bagging
+
+Multiple models are trained and their predictions are combined.
+
+### Boosting
+
+Models are built sequentially to improve previous errors.
+
+### Voting
+
+Predictions from several models are combined to determine the final class.
+
+### Stacking
+
+Predictions from base models are provided to another model, called a meta-model, which learns how to combine them.
+
+The exact ensemble technique used in our project should be described according to our final implementation.
+
+---
+
+# 44. Explainable AI
+
+Our project requires understanding concepts such as:
+
+* feature contribution,
+* global explanations,
+* local explanations,
+* model interpretability,
+* prediction transparency,
+* and XAI techniques.
+
+The goal is to answer:
+
+> "Why did the model make this prediction?"
+
+rather than providing only the final class.
+
+---
+
+# 45. Model Evaluation
+
+Our evaluation should consider more than one metric.
+
+Important metrics include:
+
+* Accuracy
+* Precision
+* Recall
+* F1-score
+* Balanced Accuracy
+* Balanced Error Rate
+* Confusion Matrix
+
+For an imbalanced fetal-health dataset, balanced accuracy and class-wise recall are particularly important.
+
+---
+
+# 46. Why Confusion Matrix Matters
+
+For three classes:
+
+```text
+                Predicted
+              N      S      P
+Actual N
+       S
+       P
+```
+
+The confusion matrix allows us to identify:
+
+* Normal → Normal
+* Normal → Suspect
+* Normal → Pathological
+* Suspect → Normal
+* Suspect → Suspect
+* Suspect → Pathological
+* Pathological → Normal
+* Pathological → Suspect
+* Pathological → Pathological
+
+This is more informative than a single accuracy number because it shows which classes are being confused.
+
+---
+
+# 47. Why Explainability Is Particularly Important Here
+
+A healthcare-oriented AI system should ideally provide more than:
+
+> **Prediction: Pathological**
+
+It should provide information such as:
+
+> The prediction was strongly influenced by specific CTG characteristics.
+
+The actual features and their contribution should be determined from the implemented XAI method.
+
+This can help:
+
+* improve transparency,
+* support human review,
+* identify influential CTG characteristics,
+* increase trust in the system,
+* and help researchers understand model behaviour.
+
+The system should still be treated as **decision support**, not an autonomous medical authority.
+
+---
+
+# 48. Base Paper vs Our Project
+
+| Aspect                 | Base Paper                                           | Our Project                                        |
+| ---------------------- | ---------------------------------------------------- | -------------------------------------------------- |
+| Domain                 | Fetal health classification                          | Fetal health risk assessment                       |
+| Data                   | CTG                                                  | CTG                                                |
+| Dataset                | UCI CTG                                              | Based on same project foundation                   |
+| Classes                | Normal, Suspect, Pathological                        | Same classification foundation                     |
+| Imbalance              | Yes                                                  | Yes                                                |
+| SMOTE                  | Yes                                                  | Adopted as foundation                              |
+| Feature analysis       | Yes                                                  | Yes                                                |
+| Multiple ML models     | Yes                                                  | Yes                                                |
+| 5-fold CV              | Yes                                                  | Adopted as evaluation foundation                   |
+| Balanced Accuracy      | Yes                                                  | Important evaluation metric                        |
+| Single-model selection | LightGBM selected                                    | Framework extends beyond single-model selection    |
+| Optimization           | Model fine-tuning discussed                          | Optimization is a central project component        |
+| Ensemble learning      | Discussed in literature, not central final framework | Central component of our proposed framework        |
+| Explainability         | Random Forest feature importance                     | Dedicated XAI-oriented component                   |
+| User interface         | LightGBM-based interface                             | AI-assisted risk assessment interface              |
+| Main focus             | Imbalanced CTG classification                        | Optimized + ensemble + explainable risk assessment |
+
+---
+
+# 49. The Core Research Gap for Our Project
+
+The gap we identify is **not that the base paper failed to solve fetal health classification**.
+
+The base paper already demonstrates that machine learning can classify CTG-based fetal health and that handling class imbalance is important.
+
+Our research direction instead asks:
+
+> **Can the CTG classification framework be extended into an optimized, ensemble-based and explainable system that provides more transparent and robust fetal health risk assessment?**
+
+The gap therefore lies in combining these aspects into one coherent framework.
+
+Our project focuses on:
+
+```text
+Base Paper Foundation
+        +
+Optimization
+        +
+Ensemble Learning
+        +
+Explainability
+        ↓
+Our Proposed Framework
+```
+
+This is the central research motivation behind our project.
+
+---
+
+# 50. What We Should Not Claim
+
+For academic accuracy, we should avoid statements such as:
+
+> "The base paper's model is inaccurate."
+
+That is not supported by the paper.
+
+We should also avoid:
+
+> "Our proposed model is better than LightGBM."
+
+That can only be stated after our experiments demonstrate it.
+
+Instead, we should say:
+
+> "The base paper provides a strong baseline using LightGBM and imbalance-aware evaluation. Our project extends this baseline by investigating optimization, ensemble learning and explainability."
+
+Then, after experiments, we can objectively compare the results.
+
+---
+
+# 51. Our Baseline
+
+The base paper provides an important baseline for our work.
+
+The most relevant baseline result is:
+
+**LightGBM — 91.34% balanced accuracy using 5-fold cross-validation.**
+
+Therefore, our experiments can compare the proposed framework against appropriate baseline models.
+
+For example:
+
+```text
+Baseline:
+LightGBM
+
+        ↓
+
+Optimized LightGBM
+
+        ↓
+
+Individual optimized models
+
+        ↓
+
+Ensemble model
+
+        ↓
+
+Explainable ensemble framework
+```
+
+This provides a logical experimental progression.
+
+---
+
+# 52. Expected Experimental Comparison in Our Project
+
+Our experimental evaluation can be organized around questions such as:
+
+### Experiment 1
+
+How does our preprocessing pipeline perform?
+
+### Experiment 2
+
+What happens before and after class balancing?
+
+### Experiment 3
+
+How do individual models perform?
+
+### Experiment 4
+
+Does optimization improve the selected models?
+
+### Experiment 5
+
+Does ensemble learning provide different performance compared with individual models?
+
+### Experiment 6
+
+How does the proposed framework compare with the base-paper baseline?
+
+### Experiment 7
+
+Which CTG features contribute most strongly to the predictions?
+
+### Experiment 8
+
+Can the model provide understandable explanations for individual predictions?
+
+This gives the project a clear experimental structure.
+
+---
+
+# 53. Expected Output of Our System
+
+The system should ultimately accept CTG-related feature values and generate an AI-assisted assessment.
+
+Conceptually:
+
+```text
+User enters CTG parameters
+          ↓
+Data preprocessing
+          ↓
+Optimized ensemble model
+          ↓
+Prediction
+          ↓
+Normal / Suspect / Pathological
+          ↓
+Risk-oriented interpretation
+          ↓
+XAI explanation
+          ↓
+Important contributing features
+```
+
+The exact UI and wording should be implemented carefully so that the output is presented as **decision support**, not as a definitive medical diagnosis.
+
+---
+
+# 54. Practical Significance
+
+The base paper discusses the possibility of integrating the model with:
+
+* electronic fetal monitoring systems,
+* hospital information systems,
+* and real-time CTG analysis.
+
+Our project follows the same broader direction but focuses on making the computational framework more:
+
+* optimized,
+* ensemble-oriented,
+* explainable,
+* and suitable for AI-assisted risk assessment.
+
+The ultimate purpose is to support healthcare professionals by providing a rapid and interpretable computational assessment of CTG data. 
+
+---
+
+# 55. Key Technical Concepts We Must Know for the Project
+
+Before implementing or presenting the project, we should be comfortable with:
+
+### Data
+
+* CTG
+* FHR
+* UC
+* CTG features
+* multiclass classification
+
+### Preprocessing
+
+* missing values
+* feature correlation
+* redundancy
+* scaling where required
+* train/test splitting
+
+### Imbalanced Learning
+
+* class imbalance
+* minority class
+* majority class
+* SMOTE
+* data leakage
+
+### Machine Learning
+
+* Decision Tree
+* Random Forest
+* SVM
+* KNN
+* Gradient Boosting
+* ExtraTrees
+* LightGBM
+* CatBoost
+
+### Evaluation
+
+* confusion matrix
+* accuracy
+* precision
+* recall
+* F1-score
+* balanced accuracy
+* balanced error rate
+* cross-validation
+
+### Optimization
+
+* hyperparameters
+* parameter search
+* objective function
+* cross-validation-based optimization
+
+### Ensemble Learning
+
+* voting
+* bagging
+* boosting
+* stacking
+* base learners
+* meta-learner
+
+### Explainable AI
+
+* feature importance
+* global explanation
+* local explanation
+* feature contribution
+* model transparency
+
+---
+
+# 56. Important Viva Questions From the Base Paper
+
+## Q1. Why did you select this paper as your base paper?
+
+**Answer:**
+
+We selected it because it directly addresses fetal health classification using CTG data and provides a complete machine-learning pipeline involving preprocessing, class-imbalance handling using SMOTE, multiple classification algorithms, cross-validation and balanced-accuracy-based evaluation. These components provide a strong methodological foundation for our proposed project.
+
+---
+
+## Q2. What is the major problem addressed by the paper?
+
+**Answer:**
+
+The paper addresses automatic classification of fetal health conditions from CTG data, with particular emphasis on the class imbalance present in the dataset.
+
+---
+
+## Q3. Why is the dataset imbalanced?
+
+**Answer:**
+
+The three fetal health conditions do not occur equally in the dataset. Normal cases form the majority, while Suspect and Pathological cases are minority classes.
+
+---
+
+## Q4. Why is accuracy alone not enough?
+
+**Answer:**
+
+Because the dataset is imbalanced. A model can obtain high overall accuracy by performing well on the majority Normal class while performing poorly on minority classes. Balanced accuracy gives equal importance to the recall of all classes.
+
+---
+
+## Q5. What is SMOTE?
+
+**Answer:**
+
+SMOTE stands for Synthetic Minority Oversampling Technique. It generates synthetic minority-class samples by interpolating between existing minority observations and their nearest minority-class neighbors.
+
+---
+
+## Q6. Why did the paper use SMOTE?
+
+**Answer:**
+
+The paper selected SMOTE because it generates synthetic samples instead of simply duplicating minority samples, preserves majority-class information unlike undersampling, and showed more consistent performance improvements than class weighting in the preliminary experiments described by the authors.
+
+---
+
+## Q7. Why should SMOTE not be applied to the test set?
+
+**Answer:**
+
+The test set should represent unseen data. Applying SMOTE to the test set can contaminate the evaluation process and produce an unrealistic estimate of model performance.
+
+---
+
+## Q8. What is 5-fold cross-validation?
+
+**Answer:**
+
+The dataset is divided into five folds. During each iteration, one fold is used for testing and the remaining four folds are used for training. This is repeated five times so that every fold serves as the test fold once.
+
+---
+
+## Q9. What is the difference between SMOTE and cross-validation?
+
+**Answer:**
+
+SMOTE addresses class imbalance, while cross-validation provides a more robust method of evaluating model performance. They solve different problems.
+
+---
+
+## Q10. Which model performed best in the base paper?
+
+**Answer:**
+
+LightGBM achieved the highest reported balanced accuracy among the traditional ML models, with **91.34% balanced accuracy under 5-fold cross-validation**.
+
+---
+
+## Q11. What was the highest standard accuracy reported?
+
+**Answer:**
+
+LightGBM achieved **95.67% accuracy** under the 80/20 train-test evaluation.
+
+---
+
+## Q12. Why did the paper investigate DNN?
+
+**Answer:**
+
+The authors wanted to determine whether a deep learning approach could capture complex patterns in CTG data and provide better performance than traditional machine-learning models.
+
+---
+
+## Q13. Did DNN outperform the traditional ML models?
+
+**Answer:**
+
+No. The paper reports that, given the limited size of the medical dataset, the investigated DNN did not outperform the traditional machine-learning approaches. The authors suggest that larger and more diverse datasets may make deep learning more advantageous.
+
+---
+
+## Q14. What is the main gap that your project addresses?
+
+**Answer:**
+
+Our project extends the base-paper methodology by bringing together optimization, ensemble learning and explainability into a single framework for AI-assisted fetal health risk assessment.
+
+---
+
+## Q15. Are you claiming that your project is already better than the base paper?
+
+**Answer:**
+
+No. The base paper provides our baseline. We can claim improvement only after conducting controlled experiments and demonstrating improvement using appropriate evaluation metrics.
+
+---
+
+# 57. One-Minute Explanation of Our Project
+
+If the panel asks:
+
+> **"Explain your project in simple terms."**
+
+We can answer:
+
+> Our project is based on fetal health classification using cardiotocography data. The base paper showed that machine learning can classify fetal health into Normal, Suspect and Pathological classes, but the dataset is highly imbalanced, so balanced accuracy and SMOTE are important. We take this methodology as our foundation and extend it by introducing an optimized ensemble learning framework. Instead of relying only on a single classifier, we investigate multiple models and their optimized configurations and combine their strengths through ensemble learning. We also incorporate explainable AI so that the system does not only provide a fetal health prediction but also provides information about the important factors contributing to that prediction. Therefore, our objective is to develop an AI-assisted, optimized and explainable framework for early fetal health risk assessment using CTG data.
+
+---
+
+# 58. Our Project in One Technical Diagram
+
+```text
+                    CTG DATA
+                       │
+                       ▼
+              ┌─────────────────┐
+              │ Data Preprocess │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │ Feature Analysis│
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │  Class Balance  │
+              │     + SMOTE     │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │ Candidate Models│
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │   Optimization  │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │ Ensemble Model  │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │   Prediction    │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │      XAI        │
+              │ Explanation     │
+              └────────┬────────┘
+                       │
+                       ▼
+        ┌──────────────────────────────┐
+        │ AI-Assisted Fetal Health     │
+        │ Risk Assessment              │
+        └──────────────────────────────┘
+```
+
+---
+
+# 59. Final Takeaway From the Base Paper
+
+The most important thing we take from the base paper is **not simply the LightGBM result**.
+
+The real methodological foundation is:
+
+```text
+CTG Data
+   ↓
+Preprocessing
+   ↓
+Imbalanced Dataset
+   ↓
+SMOTE
+   ↓
+Multiple ML Models
+   ↓
+Cross-Validation
+   ↓
+Balanced Accuracy
+   ↓
+Model Comparison
+   ↓
+LightGBM Baseline
+```
+
+Our project then extends this foundation:
+
+```text
+Base Paper Foundation
+        ↓
+Better Optimization
+        +
+Ensemble Learning
+        +
+Explainable AI
+        ↓
+Optimized Explainable Ensemble Framework
+        ↓
+AI-Assisted Fetal Health Risk Assessment
+```
+
+So the relationship between the two can be expressed in one sentence:
+
+> **The base paper establishes an imbalance-aware CTG classification framework, while our project builds on that foundation by investigating an optimized, ensemble-based and explainable framework for AI-assisted fetal health risk assessment.**
+
+
+
+---
+
+## Reference
+
+Nazli, I., Korbeko, E., Dogru, S., Kugu, E., & Sahingoz, O. K. (2025). *Early Detection of Fetal Health Conditions Using Machine Learning for Classifying Imbalanced Cardiotocographic Data*. **Diagnostics, 15**, 1250. DOI: 10.3390/diagnostics15101250. 
+
+---
+
